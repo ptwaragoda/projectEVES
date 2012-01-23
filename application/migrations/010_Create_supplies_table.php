@@ -12,9 +12,8 @@ class Migration_Create_supplies_table extends	Migration {
 			$this->dbforge->add_key('id', TRUE);
 			$this->dbforge->add_field(array(
 				'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-				'description' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
-				'price' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
-			));
+				'description' => array('type' => 'VARCHAR', 'constraint' => '500', 'null' => FALSE),
+				'price' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE)));
 			$this->dbforge->create_table('supplies', TRUE);
 		}
 		

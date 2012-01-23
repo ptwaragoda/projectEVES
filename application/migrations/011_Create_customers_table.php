@@ -19,7 +19,7 @@ class Migration_Create_customers_table extends	Migration {
 				'cEmail'=>array('type'=>'VARCHAR','constraint'=> '100', 'null' => FALSE),
 				'status'=>array('type'=>'VARCHAR','constraint'=> '10', 'null' => FALSE),
 				'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
-				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE),
+				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
 			));
 			$this->dbforge->create_table('customers', TRUE);
 		}

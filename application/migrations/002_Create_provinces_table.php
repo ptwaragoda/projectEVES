@@ -13,7 +13,7 @@ class Migration_Create_provinces_table extends	Migration {
 			$this->dbforge->add_field(array(
 				'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 				'short_name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
-				'name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
+				'name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE)
 			));
 			$this->dbforge->create_table('provinces', TRUE);
 		}
