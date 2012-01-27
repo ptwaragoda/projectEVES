@@ -4,11 +4,16 @@ class Site extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+
+		//if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 	}
 
 	function home()
 	{
-		echo "This is the home page";
+		$userId = $this->tank_auth->get_user_id();
+		$username = $this->tank_auth->get_username();
+
+		echo "$username has the id $userId";
 	}
 
 	function greeting($name=NULL,$lastname=NULL)
@@ -16,12 +21,14 @@ class Site extends CI_Controller {
 		if($name == NULL || $lastname == NULL) show_error('You cannot access this page directly');
 		echo 'hello '.$name.' '.$lastname;
 	}
-	
+
 	function index()
 	{
-		$p = new Blogpost();
-		$p->get();
-		$data['posts'] = $p;
+		//$p = new Blogpost();
+		//$p->get();
+		//$data['posts'] = $p;
+		$data['posts']="Welcome to the EVEs system";
+		$data['msg']="Please choose the following:";
 		$this->load->view('homepage',$data);
 	}
 

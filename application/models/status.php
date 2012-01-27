@@ -1,9 +1,10 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Machine extends DataMapper {
+class Status extends DataMapper {
 
-	var $has_one = array('machinemodel','status');
-	var $has_many = array('machinelineitem');
+	var $has_many = array('machine');
+
+	var $table = 'statuses';
 
     function __construct($id = NULL)
     {

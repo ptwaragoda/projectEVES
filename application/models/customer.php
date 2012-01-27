@@ -13,7 +13,27 @@ class Customer extends DataMapper {
 		'last_name' => array(
 	    	'label' => 'Last Name',
 	    	'rules' => array('required','trim')
-		)
+		),
+		'email' => array(
+	    	'label' => 'Email Address',
+	    	'rules' => array('required','trim', 'valid_email')
+		),
+		'company' => array(
+	    	'label' => 'Company Name',
+	    	'rules' => array('trim')
+		),
+		'company_address' => array(
+	    	'label' => 'Company Address',
+	    	'rules' => array('trim')
+		),
+		'phone' => array(
+	    	'label' => 'Phone',
+	    	'rules' => array('trim','required')
+		),
+		'visible' => array(
+	    	'label' => 'Company Name',
+	    	'rules' => array('trim','integer')
+		),
 	);
 
     function __construct($id = NULL)

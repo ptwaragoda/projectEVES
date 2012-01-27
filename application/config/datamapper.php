@@ -8,8 +8,8 @@
 
 $config['prefix'] = '';
 $config['join_prefix'] = 'join_';
-$config['error_prefix'] = '';
-$config['error_suffix'] = '';
+$config['error_prefix'] = '<div class="error">';
+$config['error_suffix'] = '</div>';
 $config['created_field'] = 'created_on';
 $config['updated_field'] = 'updated_on';
 $config['local_time'] = FALSE;

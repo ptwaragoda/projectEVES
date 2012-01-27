@@ -12,8 +12,8 @@ class Migration_Create_machinemodels_table extends	Migration {
 			$this->dbforge->add_key('id', TRUE);
 			$this->dbforge->add_field(array(
 				'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-				'machine_brand_name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
-				'machine_model_name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE)
+				'brand_name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
+				'model_name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE)
 			));
 			$this->dbforge->create_table('machinemodels', TRUE);
 		}
