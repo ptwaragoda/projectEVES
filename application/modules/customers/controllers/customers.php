@@ -50,6 +50,7 @@ class Customers extends CI_Controller {
 			$c->last_name = $this->input->post('last_name', TRUE);
 			$c->email = $this->input->post('email', TRUE);
 			$c->company = $this->input->post('company', TRUE);
+			//phone in () should be match with the id of the lable that is used to input the phone number in crete.php file
 			$c->phone = $this->input->post('phone', TRUE);
 
 			if($c->save())

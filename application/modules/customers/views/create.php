@@ -42,6 +42,7 @@
 <?=form_input('phone',$this->input->post('phone'))?><br/>
 <?=(isset($errors) && $errors->phone)?$errors->phone:''?>
 
+
 <br/><br/><?=form_submit('submit','Create Customer')?>
 
 <?=form_close()?>
