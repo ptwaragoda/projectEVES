@@ -1,7 +1,12 @@
 <?$this->load->view('header')?>
 
 <?if($this->session->flashdata('success')):?>
-	<div><?=$this->session->flashdata('success')?></div>
+	 <!-- Notification messages -->
+        <div class="pt20">
+	        <div class="nNote nSuccess hideit">
+	            <p><strong>SUCCESS: </strong><?=$this->session->flashdata('success')?></p>
+	        </div>  
+	    </div>
 <?endif?>
 
 <?if($customers->exists()):?>

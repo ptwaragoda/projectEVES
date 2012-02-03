@@ -6,8 +6,8 @@ class Migration_Create_transactions_table extends	Migration {
 	{
 		$this->migrations->set_verbose(true);
 		
-		print "Creating table 'transaction'...<br/>";
-		if (!$this->db->table_exists('transaction'))
+		print "Creating table 'transactions'...<br/>";
+		if (!$this->db->table_exists('transactions'))
 		{	
 			$this->dbforge->add_key('id', TRUE);
 			$this->dbforge->add_field(array(
@@ -20,13 +20,13 @@ class Migration_Create_transactions_table extends	Migration {
 	 			'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
 				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
 			));
-			$this->dbforge->create_table('transaction', TRUE);
+			$this->dbforge->create_table('transactions', TRUE);
 		}
 	}
 	
 	function down()
 	{
-		$this->dbforge->drop_table('transaction');
+		$this->dbforge->drop_table('transactions');
 	}
 	
 }

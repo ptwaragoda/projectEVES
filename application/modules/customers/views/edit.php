@@ -1,49 +1,66 @@
-<html>
-<head>
-	<title>Create Customer</title>
-	<style type="text/css">
-		div.error{
-			color:red;
-			font-weight:bold;
-		}
-	</style>
-</head>
-<body>
-
-<h1>Edit Customer</h1>
+<?$this->load->view('header')?>
 
 <?if($this->session->flashdata('success')):?>
-	<div><?=$this->session->flashdata('success')?></div>
+	 <!-- Notification messages -->
+        <div class="pt20">
+	        <div class="nNote nSuccess hideit">
+	            <p><strong>SUCCESS: </strong><?=$this->session->flashdata('success')?></p>
+	        </div>  
+	    </div>
 <?endif?>
 
-<?/*<?if(isset($errors)):?>
-	<div><?=$errors->string?></div>
-<?endif?>*/?>
 
-<?=form_open($this->uri->uri_string())?>
+<?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
+	<fieldset>
+		<div class="rowElem noborder">
+			<?=form_label('First name','first_name')?>
+			<div class="formRight">
+				<?=form_input('first_name',$customer->first_name)?>
+			</div>
+			<?=(isset($errors) && $errors->first_name)?$errors->first_name:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('First name','first_name')?><br/>
-<?=form_input('first_name',$customer->first_name)?><br/>
-<?=(isset($errors) && $errors->first_name)?$errors->first_name:''?>
+		<div class="rowElem">
+			<?=form_label('Last name','last_name')?>
+			<div class="formRight">
+				<?=form_input('last_name',$customer->last_name)?>
+			</div>
+			<?=(isset($errors) && $errors->last_name)?$errors->last_name:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('Last name','last_name')?><br/>
-<?=form_input('last_name',$customer->last_name)?><br/>
-<?=(isset($errors) && $errors->last_name)?$errors->last_name:''?>
+		<div class="rowElem">
+			<?=form_label('Email Address','email')?>
+			<div class="formRight">
+				<?=form_input('email',$customer->email)?>
+			</div>
+			<?=(isset($errors) && $errors->email)?$errors->email:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('Email Address','email')?><br/>
-<?=form_input('email',$customer->email)?><br/>
-<?=(isset($errors) && $errors->email)?$errors->email:''?>
+		<div class="rowElem">
+			<?=form_label('Company name','company')?>
+			<div class="formRight">
+				<?=form_input('company',$customer->company)?>
+			</div>
+			<?=(isset($errors) && $errors->company)?$errors->company:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('Company name','company')?><br/>
-<?=form_input('company',$customer->company)?><br/>
-<?=(isset($errors) && $errors->company)?$errors->company:''?>
-
-<?=form_label('Phone','phone')?><br/>
-<?=form_input('phone',$customer->phone)?><br/>
-<?=(isset($errors) && $errors->phone)?$errors->phone:''?>
-
-<br/><br/><?=form_submit('submit','Update Customer')?>
-
+		<div class="rowElem">
+			<?=form_label('Phone','phone')?>
+			<div class="formRight">
+				<?=form_input('phone',$customer->phone)?>
+			</div>
+			<?=(isset($errors) && $errors->phone)?$errors->phone:''?>
+			<div class="fix"></div>
+		</div>
+		<?=form_submit('submit','Update Customer','class="greyishBtn submitForm"')?>
+ </fieldset>
 <?=form_close()?>
-</body>
-</html>
+
+
+
+
+<?$this->load->view('footer')?>

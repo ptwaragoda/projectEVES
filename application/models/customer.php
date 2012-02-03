@@ -40,5 +40,10 @@ class Customer extends DataMapper {
     {
         parent::__construct();
     }
+
+    function getFullName()
+    {
+    	return $this->first_name.' '.$this->last_name;
+    }
 	
 }

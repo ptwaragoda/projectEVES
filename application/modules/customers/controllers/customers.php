@@ -18,15 +18,23 @@ class Customers extends CI_Controller {
 
 		$c = new Customer();
 		$c->order_by('created_on','desc')->get();
-		$data['customers'] = $c;
 
+		//customers is the index name which could be any name and this name 
+		//will become a variable in our view
+		$data['customers'] = $c;
 		$data['title'] = 'Customers';
+
+		//goes to the customer module and then list.php in the views folder
 		$this->load->view('customers/list',$data);
 	}
 
+	//reason we set the customerid to null is in case no id is passed to the page
+	//we can control the error message
 	function view($customerId = NULL)
 	{
 		// This is where we "view" a customer
+
+		//$this->output->enable_profiler(TRUE); // This shows profile information.
 
 		if($customerId == NULL) show_error("You cannot access this page directly");
 
@@ -36,7 +44,9 @@ class Customers extends CI_Controller {
 
 		if(!$c->exists()) show_error('The customer you are trying to view does not exist');
 
+		$data['title'] = 'Customer: '.$c->getFullName();
 		$data['customer'] = $c;
+		$data['transactions'] = $c->transactions->count();
 		$this->load->view('customers/view',$data); // This is the details view
 	}
 	
@@ -57,7 +67,7 @@ class Customers extends CI_Controller {
 			if($c->save())
 			{
 				$this->session->set_flashdata('success', 'The customer was successfully created');
-				redirect('customers/edit/'.$c->id);
+				redirect('customers');
 			}
 			else
 			{
