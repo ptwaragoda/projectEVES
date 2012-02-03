@@ -16,7 +16,9 @@ class Migration_Create_transactions_table extends	Migration {
 				'start_date' => array('type' => 'DATETIME','null' => FALSE),
 				'end_date' => array('type' => 'DATETIME','null' => FALSE),
 				'total_rent' => array('type' => 'VARCHAR', 'constraint' => '255','null' => FALSE),
-	 			'final_total' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE)
+	 			'final_total' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
+	 			'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
+				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
 			));
 			$this->dbforge->create_table('transaction', TRUE);
 		}

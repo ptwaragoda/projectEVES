@@ -17,7 +17,9 @@ class Migration_Create_machines_table extends	Migration {
 				'purchase_date'=>array('type'=>'DATETIME','null' => FALSE),
 				'serial_num'=>array('type'=>'VARCHAR','constraint'=> '20', 'null' => FALSE),
 				'status_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE),
-				'machinemodel_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE)
+				'machinemodel_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE),
+				'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
+				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
 			));
 			$this->dbforge->create_table('machines', TRUE);
 		}

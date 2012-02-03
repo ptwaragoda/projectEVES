@@ -14,7 +14,9 @@ class Migration_Create_taxes_table extends	Migration {
 				'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 				'name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
 				'value' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
-				'province_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE)
+				'province_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE),
+				'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
+				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
 			));
 			$this->dbforge->create_table('taxes', TRUE);
 		}	

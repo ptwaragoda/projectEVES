@@ -5,10 +5,16 @@ class Site extends CI_Controller {
 	{
 		parent::__construct();
 
-		//if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
+		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 	}
 
-	function home()
+	function index()
+	{
+		$data['title'] = 'Dashboard';
+		$this->load->view('homepage',$data);
+	}
+
+	/*function home()
 	{
 		$userId = $this->tank_auth->get_user_id();
 		$username = $this->tank_auth->get_username();
@@ -22,9 +28,9 @@ class Site extends CI_Controller {
 		echo 'hello '.$name.' '.$lastname;
 	}
 
-	function index()
-	{
-		//$p = new Blogpost();
+	function index2()
+
+		//$	{ = new Blogpost();
 		//$p->get();
 		//$data['posts'] = $p;
 		$data['posts']="Welcome to the EVEs system";
@@ -52,6 +58,6 @@ class Site extends CI_Controller {
 
 		redirect('site/index');
 	}
-	
+	*/
 	
 }

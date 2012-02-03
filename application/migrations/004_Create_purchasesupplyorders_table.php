@@ -16,7 +16,9 @@ class Migration_Create_purchasesupplyorders_table extends	Migration {
 				'final_total' => array('type' => 'VARCHAR', 'constraint' => '30', 'null' => TRUE),
 				'payment_status' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => TRUE),
 				'end_date' => array('type' => 'DATETIME', 'null' => FALSE),
-				'start_date' => array('type' => 'DATETIME', 'null' => FALSE)
+				'start_date' => array('type' => 'DATETIME', 'null' => FALSE),
+				'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
+				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
 			));
 			$this->dbforge->create_table('purchasesupplyorders', TRUE);
 		}

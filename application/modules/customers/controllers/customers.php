@@ -20,6 +20,7 @@ class Customers extends CI_Controller {
 		$c->order_by('created_on','desc')->get();
 		$data['customers'] = $c;
 
+		$data['title'] = 'Customers';
 		$this->load->view('customers/list',$data);
 	}
 
@@ -63,7 +64,7 @@ class Customers extends CI_Controller {
 			}
 		}
 		$data['customer'] = $c;
-		$data['heading']= 'Create Customer';
+		$data['title']= 'Create Customer';
 		$this->load->view('customers/create',$data);
 	}
 
