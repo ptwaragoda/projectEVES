@@ -1,10 +1,29 @@
-<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
+/<?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Machinelineitem extends DataMapper {
 
 	var $has_one = array('transaction','machine');
 
 	var $table = 'Machinelineitems';
+
+	var $validation = array(
+		'name' => array(
+	    	'label' => 'Machine Name',
+	    	'rules' => array('required','trim','max_size' => 255)
+		),
+		'quantity' => array(
+	    	'label' => 'Quantity',
+	    	'rules' => array('required','trim','integer')
+		),
+		'price' => array(
+	    	'label' => 'Machine Price',
+	    	'rules' => array('required','trim','decimal')
+		),
+		'transaction_id' => array(
+	    	'label' => 'Transaction ID',
+	    	'rules' => array('required','trim','integer')
+		),
+	);
 
     function __construct($id = NULL)
     {

@@ -1,5 +1,5 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-class Customers extends CI_Controller {
+class Purchasesupplyorders extends CI_Controller {
 
 	function __construct()
 	{
@@ -9,29 +9,28 @@ class Customers extends CI_Controller {
 	function showsuccess()
 	{
 		$this->session->set_flashdata('success',date('Y-m-d H:i:s'));
-		redirect('customers');
+		redirect('purchasesupplyorder');
 	}
 
 	function index()
 	{
 		//TODO: This is the default function. This should ideally list customers
 
-		$c = new Customer();
-		$c->order_by('created_on','desc')->get();
-		$data['customers'] = $c;
+		$p = new Purchasesupplyorder();
+		$p->order_by('payment_status','desc')->get();
+		$data['purchasesupplyorders'] = $p;
 
-		$data['title'] = 'Customers';
-		$this->load->view('customers/list',$data);
+		$this->load->view('purchasesupplyorders/list',$data);
 	}
 
-	function view($customerId = NULL)
+	function view($purchasesupplyorderId = NULL)
 	{
 		// This is where we "view" a customer
 
-		if($customerId == NULL) show_error("You cannot access this page directly");
+		if($purchasesupplyorderId == NULL) show_error("You cannot access this page directly");
 
-		$c = new Customer();
-		$c->get_by_id($customerId);
+		$c = new Purchasesupplyorder();
+		$c->get_by_id($purchasesupplyorderId);
 		//$c->where('id',$customerId)->get(); This is the same as above
 
 		if(!$c->exists()) show_error('The customer you are trying to view does not exist');
@@ -43,32 +42,40 @@ class Customers extends CI_Controller {
 	function create()
 	{
 		//TODO: We show the form and also create a customer here.
-		$c = new Customer();
+		$p = new Customer();
+		$s = new Purchasesupplyorder();
+		$sitem = new Supplyitem();
+		$sup = new Supply();
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$c->first_name = $this->input->post('first_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
-			$c->last_name = $this->input->post('last_name', TRUE);
-			$c->email = $this->input->post('email', TRUE);
-			$c->company = $this->input->post('company', TRUE);
+			$s->start_date = $this->input->post('start_date', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
+			$s->end_date = $this->input->post('end_date', TRUE);
+			$s->payment_status = $this->input->post('payment_status', TRUE);
+			$sitem->quantity = $this->input->post('quantity', TRUE);
+			$sup->description = $this->input->post('description', TRUE);
+			$sup->price = $this->input->post('price', TRUE);
 			//phone in () should be match with the id of the lable that is used to input the phone number in crete.php file
-			$c->phone = $this->input->post('phone', TRUE);
 
-			if($c->save())
+
+			if($s->save()&&$sup->save()&&$sitem->save())
 			{
 				$this->session->set_flashdata('success', 'The customer was successfully created');
-				redirect('customers/edit/'.$c->id);
+				//redirect('customers/edit/'.$p->id);
 			}
 			else
 			{
-				$data['errors'] = $c->error;
+				$data['errors'] = $s->error;
 			}
 		}
-		$data['customer'] = $c;
-		$data['title']= 'Create Customer';
-		$this->load->view('customers/create',$data);
+		$data['purchasesupplyorder'] = $s;
+		$data['supply'] = $sup;
+		$data['Supplyitem']=$sitem;
+		$data['heading']= 'Create Customer';
+		$this->load->view('purchasesupplyorders/create',$data);
 	}
 
+//changed up to here 
 	function edit($customerId = NULL)
 	{
 		//TODO: This should edit a given customer

@@ -75,5 +75,4 @@
  </fieldset>
 <?=form_close()?>
 
-
 <?$this->load->view('footer')?>
