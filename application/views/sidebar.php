@@ -8,6 +8,12 @@
                 <li><a href="<?=site_url('customers/create')?>" title="">Create Customer</a></li>
             </ul>
         </li>
+                <li class="errors"><a href="#" title="" class="exp"><span>Supplies</span></a>
+                <ul class="sub">
+                <li><a href="<?=site_url('supplies')?>" title="">Manage supplies</a></li>
+                <li><a href="<?=site_url('supplies/create')?>" title="">Create Supply</a></li>
+            </ul>
+        </li>
         <?/*<li class="graphs"><a href="charts.html" title=""><span>Graphs and charts</span></a></li>
         <li class="forms"><a href="form_elements.html" title=""><span>Form elements</span></a></li>
         <li class="login"><a href="ui_elements.html" title=""><span>Interface elements</span></a></li>
