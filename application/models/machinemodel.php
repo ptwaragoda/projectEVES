@@ -6,10 +6,14 @@ class Machinemodel extends DataMapper {
 	var $has_many = array('machine');
 
 	var $validation = array(
-		'name' => array(
-	    	'label' => 'Machine Name',
+		'brand_name' => array(
+	    	'label' => 'Brand Name',
+	    	'rules' => array('required','trim'),
+	    ),
+	    'model_name' => array(
+	    	'label' => 'Model Name',
 	    	'rules' => array('required','trim')
-		)
+		),
 	);
 
     function __construct($id = NULL)
