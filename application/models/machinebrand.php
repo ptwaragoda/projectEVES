@@ -5,12 +5,12 @@ class Machinebrand extends DataMapper {
 	var $has_many = array('machinemodel');
 
 	var $validation = array(
-		'first_name' => array(
-	    	'label' => 'First Name',
+		'machine_brand_name' => array(
+	    	'label' => 'Machine Brand Name',
 	    	'rules' => array('required','trim')
 		),
-		'last_name' => array(
-	    	'label' => 'Last Name',
+		'machine_brand_serialnum' => array(
+	    	'label' => 'Machine Brand Serial Number',
 	    	'rules' => array('required','trim')
 		)
 	);

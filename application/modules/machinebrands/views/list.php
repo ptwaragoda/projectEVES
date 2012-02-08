@@ -9,29 +9,27 @@
 	    </div>
 <?endif?>
 
-<?if($customers->exists()):?>
+<?if($machinebrands->exists()):?>
 	<div class="widget first">
-		<div class="head"><h5 class="iFrames">List of Customers</h5></div>
+		<div class="head"><h5 class="iFrames">List of Machine Brands</h5></div>
 		<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
 			<thead>
 				<tr>
-					<td>First name</td>
-					<td>Last name</td>
-					<td>Phone</td>
-					<td>Company</td>
+					<td>Brand ID</td>
+					<td>Machine Brand name</td>
+					<td>Brand Serial Number</td>
 					<td>Actions</td>
 				</tr>
 			</thead>
 			<tbody>
-				<?foreach($customers->all as $c):?>
+				<?foreach($machinebrands->all as $mb):?>
 					<tr>
-						<td><a href="<?=site_url('customers/view/'.$c->id)?>"><?=$c->first_name?></a></td>
-						<td><?=$c->last_name?></td>
-						<td><?=$c->phone?></td>
-						<td><?=$c->company?></td>
+						<td><?=$mb->id?></td>
+						<td><a href="<?=site_url('machinebrands/view/'.$mb->id)?>"><?=$mb->machine_brand_name?></a></td>
+						<td><?=$mb->machine_brand_serialnum?></td>
 						<td>
-							<a href="<?=site_url('customers/edit/'.$c->id)?>">Edit</a> | 
-							<a href="<?=site_url('customers/delete/'.$c->id)?>">Delete</a>
+							<a href="<?=site_url('machinebrands/edit/'.$mb->id)?>">Edit</a> | 
+							<a href="<?=site_url('machinebrands/delete/'.$mb->id)?>">Delete</a>
 						</td>
 					</tr>
 				<?endforeach?>
@@ -47,6 +45,6 @@
 <?endif?>
 
 <br/><br/>
-<a href="<?=site_url('customers/create')?>" title="Create new customer" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Create New Customer</span></a>
+<a href="<?=site_url('machinebrands/create')?>" title="Create new machine brand" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Create New Machine Brand</span></a>
 
 <?$this->load->view('footer')?>

@@ -8,6 +8,14 @@
                 <li><a href="<?=site_url('customers/create')?>" title="">Create Customer</a></li>
             </ul>
         </li>
+        <li class="errors"><a href="#" title="" class="exp"><span>Machines</span></a>
+                <ul class="sub">
+                <li><a href="<?=site_url('machines')?>" title="">Manage Machines</a></li>
+                <li><a href="<?=site_url('machines/create')?>" title="">Create a Machine</a></li>
+                <li><a href="<?=site_url('machinemodels')?>" title="">Manage Machine Models</a></li>
+                <li><a href="<?=site_url('machinebrands')?>" title="">Manage Machine Brands</a></li>                
+            </ul>
+        </li>
         <?/*<li class="graphs"><a href="charts.html" title=""><span>Graphs and charts</span></a></li>
         <li class="forms"><a href="form_elements.html" title=""><span>Form elements</span></a></li>
         <li class="login"><a href="ui_elements.html" title=""><span>Interface elements</span></a></li>
