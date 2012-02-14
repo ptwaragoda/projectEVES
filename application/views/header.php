@@ -60,6 +60,8 @@
 <script type="text/javascript" src="<?=base_url()?>public/js/jquery.timeentry.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>public/js/jquery.prettyPhoto.js"></script>
 
+<script type="text/javascript" src="<?=base_url()?>public/js/chosen/chosen.jquery.min.js"></script>
+
 <script type="text/javascript" src="<?=base_url()?>public/js/custom.js"></script>
 
 </head>
