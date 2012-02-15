@@ -399,8 +399,10 @@ $(function() {
 	$( ".datepicker" ).datepicker({ 
 		defaultDate: +7,
 		autoSize: true,
-		appendText: '(dd-mm-yyyy)',
-		dateFormat: 'dd-mm-yy',
+		//appendText: '(dd-mm-yyyy)',
+		dateFormat: 'yy-mm-dd',
+		changeMonth: true,
+		changeYear: true
 	});	
 
 	$( ".datepickerInline" ).datepicker({ 
@@ -411,6 +413,8 @@ $(function() {
 		numberOfMonths: 1
 	});	
 
+
+	$(".chzn-select").chosen();
 
 	//===== Progressbar (Jquery UI) =====//
 

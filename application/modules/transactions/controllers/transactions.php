@@ -1,5 +1,5 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-class Customers extends CI_Controller {
+class Transactions extends CI_Controller {
 
 	function __construct()
 	{
@@ -7,26 +7,32 @@ class Customers extends CI_Controller {
 		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 	}
 
-	function showsuccess()
-	{
-		$this->session->set_flashdata('success',date('Y-m-d H:i:s'));
-		redirect('customers');
-	}
-
 	function index()
 	{
-		//TODO: This is the default function. This should ideally list customers
+		$t = new Transaction();
+		$t->where_related_user('id',$this->tank_auth->get_user_id())->order_by('created_on','desc');
 
-		$c = new Customer();
-		$c->order_by('created_on','desc')->get();
+		$customerTitle = '';
 
-		//customers is the index name which could be any name and this name 
-		//will become a variable in our view
-		$data['customers'] = $c;
-		$data['title'] = 'Customers';
+		$customerId = $this->input->get('customer');
+		if($customerId)
+		{
+			$c = new Customer();
+			$c->get_by_id($customerId);
+			if($c->exists())
+			{
+				$t->where_related_customer('id',$customerId);
+				$data['customer'] = $c;
+				$customerTitle = ' for '.$c->getFullName();
+			}
+		}
 
-		//goes to the customer module and then list.php in the views folder
-		$this->load->view('customers/list',$data);
+		$t->get();
+
+		$data['transactions'] = $t;
+		$data['title'] = 'Transactions'.$customerTitle;
+
+		$this->load->view('transactions/list',$data);
 	}
 
 	//reason we set the customerid to null is in case no id is passed to the page
@@ -54,30 +60,44 @@ class Customers extends CI_Controller {
 	function create()
 	{
 		//TODO: We show the form and also create a customer here.
-		$c = new Customer();
+		$t = new Transaction();
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$c->first_name = $this->input->post('first_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
-			$c->last_name = $this->input->post('last_name', TRUE);
-			$c->email = $this->input->post('email', TRUE);
-			$c->company = $this->input->post('company', TRUE);
-			//phone in () should be match with the id of the lable that is used to input the phone number in crete.php file
-			$c->phone = $this->input->post('phone', TRUE);
+			//prettyPrint($_POST);exit;
+			$t->trans_date = $this->input->post('trans_date', TRUE);
+			$t->start_date = $this->input->post('start_date', TRUE);
+			$t->end_date = $this->input->post('end_date', TRUE);
+			$t->tax = $this->input->post('tax', TRUE);
 
-			if($c->save())
+			$relatedObjects = array();
+
+			$c = new Customer();
+			$c->get_by_id($this->input->post('customer', TRUE));
+			if($c->exists()) $relatedOjbects[] = $c;
+
+			$u = new User();
+			$u->get_by_id($this->tank_auth->get_user_id());
+			$relatedOjbects[] = $u;
+
+			if($t->save($relatedOjbects))
 			{
-				$this->session->set_flashdata('success', 'The customer was successfully created');
-				redirect('customers');
+				$this->session->set_flashdata('success', 'The trasaction was successfully created');
+				redirect('transactions');
 			}
 			else
 			{
-				$data['errors'] = $c->error;
+				$data['errors'] = $t->error;
 			}
 		}
-		$data['customer'] = $c;
-		$data['title']= 'Create Customer';
-		$this->load->view('customers/create',$data);
+		
+		$c = new Customer();
+		$c->order_by('first_name','asc')->get();
+		$data['customers'] = $c;
+
+		$data['transaction'] = $t;
+		$data['title']= 'Create Transaction';
+		$this->load->view('transactions/create',$data);
 	}
 
 	function edit($customerId = NULL)
