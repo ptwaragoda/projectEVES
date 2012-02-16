@@ -44,10 +44,19 @@ class Machines extends CI_Controller {
 			$m->cover_square_feet = $this->input->post('cover_square_feet', TRUE);
 			$m->purchase_date = $this->input->post('purchase_date', TRUE);
 			$m->serial_num = $this->input->post('serial_num', TRUE);
-			$m->status_id = $this->input->post('status_id', TRUE);
-			$m->machinemodel_id = $this->input->post('machinemodel_id', TRUE);
+			
+			//Relationships
+			$relatedObjects = array();
 
-			if($m->save())
+			$s = new Status();
+			$s->get_by_id($this->input->post('status_id', TRUE));
+			if($s->exists()) $relatedObjects[] = $s;
+
+			$mm = new Machinemodel();
+			$mm->get_by_id($this->input->post('machinemodel_id', TRUE));
+			if($mm->exists()) $relatedObjects[] = $mm;
+
+			if($m->save($relatedObjects)
 			{
 				$this->session->set_flashdata('success', 'The machine was successfully created');
 				redirect('machines');
@@ -77,8 +86,17 @@ class Machines extends CI_Controller {
 			$m->cover_square_feet = $this->input->post('cover_square_feet', TRUE);
 			$m->purchase_date = $this->input->post('purchase_date', TRUE);
 			$m->serial_num = $this->input->post('serial_num', TRUE);
-			$m->status_id = $this->input->post('status_id', TRUE);
-			$m->machinemodel_id = $this->input->post('machinemodel_id', TRUE);
+			
+			//Relationships
+			$relatedObjects = array();
+
+			$s = new Status();
+			$s->get_by_id($this->input->post('status_id', TRUE));
+			if($s->exists()) $relatedObjects[] = $s;
+
+			$mm = new Machinemodel();
+			$mm->get_by_id($this->input->post('machinemodel_id', TRUE));
+			if($mm->exists()) $relatedObjects[] = $mm;
 
 			if($m->save())
 			{
@@ -110,14 +128,12 @@ class Machines extends CI_Controller {
 		if($m->delete())
 		{
 			$this->session->set_flashdata('success', 'The machine was successfully deleted');
-			redirect('machines');
 		}
 		else
 		{
 			$this->session->set_flashdata('errors', $m->error->string);
-			redirect('machines');
 		}
-
+		redirect('machines');
 
 		/*// Case 2: Just hiding (using a field called "visible" as an example)
 		$m->visible = 0;
@@ -132,5 +148,5 @@ class Machines extends CI_Controller {
 			redirect('machine');
 		}*/
 	}
-	
+
 }
