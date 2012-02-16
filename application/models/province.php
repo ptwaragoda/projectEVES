@@ -2,7 +2,7 @@
 
 class Province extends DataMapper {
 
-	var $has_many = array('tax');
+	var $has_one = array('tax');
 	var $table = 'provinces';
 
     function __construct($id = NULL)

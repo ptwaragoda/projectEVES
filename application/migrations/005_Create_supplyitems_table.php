@@ -12,7 +12,9 @@ class Migration_Create_supplyitems_table extends	Migration {
 			$this->dbforge->add_key('id', TRUE);
 			$this->dbforge->add_field(array(
 				'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-				'quantity' => array('type' => 'VARCHAR', 'constraint' => '10', 'null' => FALSE)
+				'quantity' => array('type' => 'VARCHAR', 'constraint' => '10', 'null' => FALSE),
+				'purchasesupplyorder_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE),
+				'supply_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE),
 			));
 			$this->dbforge->create_table('supplyitems', TRUE);
 		}

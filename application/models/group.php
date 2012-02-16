@@ -9,6 +9,10 @@ class Group extends DataMapper {
 		'name' => array(
 	    	'label' => 'Group Name',
 	    	'rules' => array('required','trim')
+		),
+		'permission' => array(
+			'label' => 'Permission set',
+			'rules' => array('required')
 		)
 	);
 

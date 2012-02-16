@@ -12,10 +12,8 @@ class Migration_Create_machinebrands_table extends	Migration {
 			$this->dbforge->add_key('id', TRUE);
 			$this->dbforge->add_field(array(
 				'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
-				'machine_brand_name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
-				'machine_brand_serialnum' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
-				'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
-				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
+				'name' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
+				'serial_number' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => FALSE),
 			));
 			$this->dbforge->create_table('machinebrands', TRUE);
 		}

@@ -34,6 +34,10 @@ class Customer extends DataMapper {
 	    	'label' => 'Company Name',
 	    	'rules' => array('trim','integer')
 		),
+		'user' => array(
+			'label' => 'User',
+			'rules' => array('required')
+		)
 	);
 
     function __construct($id = NULL)

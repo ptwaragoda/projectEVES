@@ -14,9 +14,9 @@ class Migration_Create_purchasesupplyorders_table extends	Migration {
 				'id' => array('type' => 'INT', 'unsigned' => TRUE, 'auto_increment' => TRUE),
 				'total' => array('type' => 'VARCHAR', 'constraint' => '25', 'null' => FALSE),
 				'final_total' => array('type' => 'VARCHAR', 'constraint' => '30', 'null' => TRUE),
-				'payment_status' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => TRUE),
 				'end_date' => array('type' => 'DATETIME', 'null' => FALSE),
 				'start_date' => array('type' => 'DATETIME', 'null' => FALSE),
+				'user_id' => array('type' => 'INT', 'unsigned' => TRUE, 'null' => FALSE),
 				'created_on' => array('type' => 'DATETIME', 'null' => FALSE),
 				'updated_on' => array('type' => 'DATETIME', 'null' => FALSE)
 			));

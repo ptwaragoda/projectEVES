@@ -15,13 +15,13 @@ class Machinelineitem extends DataMapper {
 	    	'label' => 'Quantity',
 	    	'rules' => array('required','trim','integer')
 		),
-		'price' => array(
+		'price' => array( // This is a field validation
 	    	'label' => 'Machine Price',
 	    	'rules' => array('required','trim','decimal')
 		),
-		'transaction_id' => array(
-	    	'label' => 'Transaction ID',
-	    	'rules' => array('required','trim','integer')
+		'transaction' => array( // This is a relationship validation
+	    	'label' => 'Transaction',
+	    	'rules' => array('required')
 		),
 	);
 

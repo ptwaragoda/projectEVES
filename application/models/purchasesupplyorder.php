@@ -15,10 +15,6 @@ class Purchasesupplyorder extends DataMapper {
 	    	'label' => 'Final Total',
 	    	'rules' => array('required','trim')
 		),
-		'payment_status' => array(
-	    	'label' => 'Payment Status',
-	    	'rules' => array('required','trim', 'valid_email')
-		),
 		'end_date' => array(
 	    	'label' => 'End Date',
 	    	'rules' => array('required','trim')

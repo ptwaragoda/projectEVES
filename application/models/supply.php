@@ -6,8 +6,8 @@ class Supply extends DataMapper {
 	var $table = 'supplies';
 
 	var $validation = array(
-		'description' => array(
-	    	'label' => 'Supply Description',
+		'name' => array(
+	    	'label' => 'Supply Name',
 	    	'rules' => array('required','trim')
 		),
 		'price' => array(
