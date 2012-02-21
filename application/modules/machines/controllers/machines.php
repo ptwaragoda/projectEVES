@@ -56,7 +56,7 @@ class Machines extends CI_Controller {
 			$mm->get_by_id($this->input->post('machinemodel_id', TRUE));
 			if($mm->exists()) $relatedObjects[] = $mm;
 
-			if($m->save($relatedObjects)
+			if($m->save($relatedObjects))
 			{
 				$this->session->set_flashdata('success', 'The machine was successfully created');
 				redirect('machines');

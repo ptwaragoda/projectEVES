@@ -64,6 +64,15 @@
 		</div>
 
 		<div class="rowElem">
+			<?=form_label('Company Address','company_address')?>
+			<div class="formRight">
+				<?=form_input('company_address',$this->input->post('company_address'))?>
+			</div>
+			<?=(isset($errors) && $errors->company_address)?$errors->company_address:''?>
+			<div class="fix"></div>
+		</div>
+
+		<div class="rowElem">
 			<?=form_label('Phone','phone')?>
 			<div class="formRight">
 				<?=form_input('phone',$this->input->post('phone'))?>
@@ -71,6 +80,7 @@
 			<?=(isset($errors) && $errors->phone)?$errors->phone:''?>
 			<div class="fix"></div>
 		</div>
+
 		<?=form_submit('submit','Create Customer','class="greyishBtn submitForm"')?>
  </fieldset>
 <?=form_close()?>

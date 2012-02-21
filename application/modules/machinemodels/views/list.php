@@ -39,7 +39,7 @@
 <?else:?>
 	<div class="pt20">
         <div class="nNote nWarning hideit">
-            <p><strong>WARNING: </strong>No Machines!</p>
+            <p><strong>WARNING: </strong>No Machine Models!</p>
         </div>
     </div>
 <?endif?>

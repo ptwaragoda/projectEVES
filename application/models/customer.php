@@ -31,7 +31,7 @@ class Customer extends DataMapper {
 	    	'rules' => array('trim','required')
 		),
 		'visible' => array(
-	    	'label' => 'Company Name',
+	    	'label' => 'Active customer',
 	    	'rules' => array('trim','integer')
 		),
 		'user' => array(
