@@ -58,7 +58,6 @@ class Customers extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$relatedObjects = array();
 			$c->first_name = $this->input->post('first_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
 			$c->last_name = $this->input->post('last_name', TRUE);
 			$c->email = $this->input->post('email', TRUE);
@@ -69,6 +68,8 @@ class Customers extends CI_Controller {
 			$c->email = $this->input->post('email', TRUE);
 			//$c->user_id=$this->tank_auth->get_user_id();
 			$c->visible = 1;
+
+			$relatedObjects = array();
 
 			$u= new User();
 			$u->get_by_id($this->tank_auth->get_user_id());
@@ -101,13 +102,24 @@ class Customers extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$c->first_name = $this->input->post('first_name', TRUE);
+			$c->first_name = $this->input->post('first_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
 			$c->last_name = $this->input->post('last_name', TRUE);
 			$c->email = $this->input->post('email', TRUE);
 			$c->company = $this->input->post('company', TRUE);
+			$c->company_address = $this->input->post('company_address', TRUE);
+			//phone in () should be match with the id of the lable that is used to input the phone number in crete.php file
 			$c->phone = $this->input->post('phone', TRUE);
+			$c->email = $this->input->post('email', TRUE);
+			//$c->user_id=$this->tank_auth->get_user_id();
+			$c->visible = 1;
 
-			if($c->save())
+			$relatedObjects = array();
+
+			$u= new User();
+			$u->get_by_id($this->tank_auth->get_user_id());
+			if($u->exists()) $relatedObjects[] = $u;
+
+			if($c->save($relatedObjects))
 			{
 				$this->session->set_flashdata('success', 'The customer was successfully updated');
 				redirect($this->uri->uri_string());
