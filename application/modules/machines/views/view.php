@@ -13,7 +13,7 @@
         <tbody>
             <tr class="noborder">
                 <td width="170">Machine name:</td>
-                <td align="right"><?=$machines->machine_name?></td>
+                <td align="right"><?=$machines->name?></td>
             </tr>
             <tr>
                 <td>Machine square feet</td>

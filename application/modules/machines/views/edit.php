@@ -13,11 +13,11 @@
 <?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
 	<fieldset>
 		<div class="rowElem noborder">
-			<?=form_label('Machine name','machine_name')?>
+			<?=form_label('Machine name','name')?>
 			<div class="formRight">
-				<?=form_input('machine_name',$machines->machine_name)?>
+				<?=form_input('name',$machines->name)?>
 			</div>
-			<?=(isset($errors) && $errors->machine_name)?$errors->machine_name:''?>
+			<?=(isset($errors) && $errors->name)?$errors->name:''?>
 			<div class="fix"></div>
 		</div>
 

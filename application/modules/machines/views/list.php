@@ -29,12 +29,12 @@
 				<?foreach($machines->all as $m):?>
 					<tr>
 						<td><?=$m->id?></td>
-						<td><a href="<?=site_url('machines/view/'.$m->id)?>"><?=$m->machine_name?></a></td>
+						<td><a href="<?=site_url('machines/view/'.$m->id)?>"><?=$m->name?></a></td>
 						<td><?=$m->cover_square_feet?></td>
 						<td><?=date('Y-m-d',strtotime($m->purchase_date))?></td>
 						<td><?=$m->serial_num?></td>
-						<td><?=$m->status_id?></td>
-						<td><?=$m->machinemodel_id?></td>
+						<td><?=$m->status_name?></td>
+						<td><?=$m->machinemodel_name?></td>
 						<td>
 							<a href="<?=site_url('machines/edit/'.$m->id)?>">Edit</a> | 
 							<a href="<?=site_url('machines/delete/'.$m->id)?>">Delete</a>

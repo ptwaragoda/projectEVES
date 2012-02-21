@@ -10,9 +10,13 @@ class Machines extends CI_Controller {
 	{
 		//TODO: This is the default function. This should ideally list machines 
 
+		//$this->output->enable_profiler(TRUE);
 		$m = new Machine();
+		$m->include_related('status',array('name'));
+		$m->include_related('machinemodel',array('name'));
 		$m->order_by('id','asc')->get();
 		$data['machines'] = $m;
+
         $data['title'] = 'List of Machines';
 		$this->load->view('machines/list',$data);
 	}
@@ -40,7 +44,7 @@ class Machines extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$m->machine_name = $this->input->post('machine_name', TRUE);
+			$m->name = $this->input->post('name', TRUE);
 			$m->cover_square_feet = $this->input->post('cover_square_feet', TRUE);
 			$m->purchase_date = $this->input->post('purchase_date', TRUE);
 			$m->serial_num = $this->input->post('serial_num', TRUE);
@@ -49,11 +53,11 @@ class Machines extends CI_Controller {
 			$relatedObjects = array();
 
 			$s = new Status();
-			$s->get_by_id($this->input->post('status_id', TRUE));
+			$s->get_by_id($this->input->post('status', TRUE));
 			if($s->exists()) $relatedObjects[] = $s;
 
 			$mm = new Machinemodel();
-			$mm->get_by_id($this->input->post('machinemodel_id', TRUE));
+			$mm->get_by_id($this->input->post('machinemodel', TRUE));
 			if($mm->exists()) $relatedObjects[] = $mm;
 
 			if($m->save($relatedObjects))
@@ -66,6 +70,17 @@ class Machines extends CI_Controller {
 				$data['errors'] = $m->error;
 			}
 		}
+
+		$statuses = new Status();
+		$statuses->where('type','1');
+		$statuses->get();
+		$data['statuses'] = $statuses;
+
+		$models = new Machinemodel();
+		$models->include_related('machinebrand',array('name'));
+		$models->order_by('name','asc')->get();
+		$data['machinemodels'] = $models;
+
 		$data['machines'] = $m;
 		$data['title'] = 'Create Machine';
 		$this->load->view('machines/create',$data);
@@ -82,7 +97,7 @@ class Machines extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$m->machine_name = $this->input->post('machine_name', TRUE);
+			$m->name = $this->input->post('name', TRUE);
 			$m->cover_square_feet = $this->input->post('cover_square_feet', TRUE);
 			$m->purchase_date = $this->input->post('purchase_date', TRUE);
 			$m->serial_num = $this->input->post('serial_num', TRUE);

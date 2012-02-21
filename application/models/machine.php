@@ -22,9 +22,13 @@ class Machine extends DataMapper {
 	    	'label' => 'Machine Serial Number',
 	    	'rules' => array('required','trim','integer')
 		),
-		'status_id' => array(
+		'status' => array(
 	    	'label' => 'Machine Status',
-	    	'rules' => array('required','trim')
+	    	'rules' => array('required')
+		),
+		'machinemodel' => array(
+	    	'label' => 'Machine Model',
+	    	'rules' => array('required')
 		),
 	);
 
