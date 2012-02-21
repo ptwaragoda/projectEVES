@@ -43,6 +43,7 @@ class Auth extends CI_Controller
 			$this->form_validation->set_rules('login', 'Login', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('remember', 'Remember me', 'integer');
+			$this->form_validation->set_error_delimiters('<div class="nNote nFailure hideit"><p><strong>FAILURE: </strong>','</p></div>');
 
 			// Get login for counting attempts to login
 			if ($this->config->item('login_count_attempts', 'tank_auth') AND
@@ -79,7 +80,7 @@ class Auth extends CI_Controller
 						redirect('/auth/send_again/');
 
 					} else {													// fail
-						foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+						foreach ($errors as $k => $v)	$data['errors'][$k] = ('<div class="nNote nFailure hideit"><p><strong>FAILURE: </strong>'.$this->lang->line($v).'</p></div>');
 					}
 				}
 			}
