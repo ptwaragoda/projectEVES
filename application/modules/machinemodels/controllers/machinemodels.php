@@ -17,6 +17,7 @@ class Machinemodels extends CI_Controller {
 		//TODO: This is the default function. This should ideally list customers
 
 		$mm = new Machinemodel();
+		$mm->include_related('machinebrand',array('name'));
 		$mm->order_by('id','asc')->get();
 
 		//customers is the index name which could be any name and this name 
@@ -75,39 +76,38 @@ class Machinemodels extends CI_Controller {
 		$this->load->view('machinemodels/create',$data);
 	}
 
-	function edit($customerId = NULL)
+	function edit($machinemodel_Id = NULL)
 	{
 		//TODO: This should edit a given customer
-		if($customerId == NULL) show_error("You cannot access this page directly");
+		if($machinemodel_Id == NULL) show_error("You cannot access this page directly");
 
-		$c = new Customer();
-		$c->get_by_id($customerId);
-		if(!$c->exists()) show_error('The customer you are trying to edit does not exist');
+		$mm = new Machinemodel();
+		$mm->include_related('machinebrand',array('name'));
+		$mm->get_by_id($machinemodel_Id);
+		if(!$mm->exists()) show_error('The Machine Model you are trying to edit does not exist');
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$c->first_name = $this->input->post('first_name', TRUE);
-			$c->last_name = $this->input->post('last_name', TRUE);
-			$c->email = $this->input->post('email', TRUE);
-			$c->company = $this->input->post('company', TRUE);
-			$c->phone = $this->input->post('phone', TRUE);
+			$mm->name = $this->input->post('name', TRUE);
+			$mm->machinebrand_name = $this->input->post('machinebrand_name', TRUE);
+			
 
-			if($c->save())
+			if($mm->save())
 			{
-				$this->session->set_flashdata('success', 'The customer was successfully updated');
+				$this->session->set_flashdata('success', 'The Machine Model was successfully updated');
 				redirect($this->uri->uri_string());
 			}
 			else
 			{
-				$data['errors'] = $c->error;
+				$data['errors'] = $mm->error;
 			}
 		}
-		$data['customer'] = $c;
-		$data['heading']= 'Edit Customer';
-		$this->load->view('customers/edit',$data);
+		$data['machinemodel'] = $mm;
+		$data['heading']= 'Edit Machine Model';
+		$this->load->view('machinemodels/edit',$data);
 	}
 
-	function delete($customerId = NULL)
+	/*function delete($machinemodel_Id = NULL)
 	{
 		//TODO: Delete a customer
 		// Figure out first whether you are truly deleting or just hiding them.
@@ -117,11 +117,11 @@ class Machinemodels extends CI_Controller {
 		// Case 1: Truly deleting
 		$c = new Customer();
 		$c->get_by_id($customerId);
-		if(!$c->exists()) show_error('The customer you are trying to delete does not exist');
+		if(!$c->exists()) show_error('The Machine Model you are trying to delete does not exist');
 
 		if($c->delete())
 		{
-			$this->session->set_flashdata('success', 'The customer was successfully deleted');
+			$this->session->set_flashdata('success', 'The Machine Model was successfully deleted');
 			redirect('customers');
 		}
 		else
@@ -131,18 +131,19 @@ class Machinemodels extends CI_Controller {
 		}
 
 
-		/*// Case 2: Just hiding (using a field called "visible" as an example)
+		/*/
+		/*/ Case 2: Just hiding (using a field called "visible" as an example)
 		$c->visible = 0;
 		if($c->save())
 		{
-			$this->session->set_flashdata('success', 'The customer was successfully deleted');
+			$this->session->set_flashdata('success', 'The Machine Model was successfully deleted');
 			redirect('customers');
 		}
 		else
 		{
 			$this->session->set_flashdata('errors', $c->error->string);
 			redirect('customers');
-		}*/
-	}
+		}
+	}*/
 	
 }

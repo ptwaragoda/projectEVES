@@ -15,8 +15,8 @@
 		<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
 			<thead>
 				<tr>
-					<td>Brand ID</td>
-					<td>Machine Brand name</td>
+					<td>ID</td>
+					<td>Name</td>
 					<td>Brand Serial Number</td>
 					<td>Actions</td>
 				</tr>
@@ -25,8 +25,8 @@
 				<?foreach($machinebrands->all as $mb):?>
 					<tr>
 						<td><?=$mb->id?></td>
-						<td><a href="<?=site_url('machinebrands/view/'.$mb->id)?>"><?=$mb->machine_brand_name?></a></td>
-						<td><?=$mb->machine_brand_serialnum?></td>
+						<td><a href="<?=site_url('machinebrands/view/'.$mb->id)?>"><?=$mb->name?></a></td>
+						<td><?=$mb->serial_number?></td>
 						<td>
 							<a href="<?=site_url('machinebrands/edit/'.$mb->id)?>">Edit</a> | 
 							<a href="<?=site_url('machinebrands/delete/'.$mb->id)?>">Delete</a>

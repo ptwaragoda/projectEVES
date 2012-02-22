@@ -22,7 +22,7 @@ class Supplies extends CI_Controller {
 		//supplies is the index name which could be any name and this name 
 		//will become a variable in our view
 		$data['supplies'] = $s;
-		$data['title'] = 'supplies';
+		$data['title'] = 'Supplies';
 
 		//goes to the customer module and then list.php in the views folder
 		$this->load->view('supplies/list',$data);
@@ -30,25 +30,27 @@ class Supplies extends CI_Controller {
 
 	//reason we set the customerid to null is in case no id is passed to the page
 	//we can control the error message
-	function view($customerId = NULL)
-	{
-		// This is where we "view" a customer
 
-		//$this->output->enable_profiler(TRUE); // This shows profile information.
 
-		if($customerId == NULL) show_error("You cannot access this page directly");
+	// function view($customerId = NULL)
+	// {
+	// 	// This is where we "view" a customer
 
-		$c = new Customer();
-		$c->get_by_id($customerId);
-		//$c->where('id',$customerId)->get(); This is the same as above
+	// 	//$this->output->enable_profiler(TRUE); // This shows profile information.
 
-		if(!$c->exists()) show_error('The customer you are trying to view does not exist');
+	// 	if($customerId == NULL) show_error("You cannot access this page directly");
 
-		$data['title'] = 'Customer: '.$c->getFullName();
-		$data['customer'] = $c;
-		$data['transactions'] = $c->transactions->count();
-		$this->load->view('supplies/view',$data); // This is the details view
-	}
+	// 	$c = new Customer();
+	// 	$c->get_by_id($customerId);
+	// 	//$c->where('id',$customerId)->get(); This is the same as above
+
+	// 	if(!$c->exists()) show_error('The customer you are trying to view does not exist');
+
+	// 	$data['title'] = 'Customer: '.$c->getFullName();
+	// 	$data['customer'] = $c;
+	// 	$data['transactions'] = $c->transactions->count();
+	// 	$this->load->view('supplies/view',$data); // This is the details view
+	// }
 	
 	function create()
 	{
@@ -57,7 +59,7 @@ class Supplies extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$s->description = $this->input->post('description', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
+			$s->name = $this->input->post('name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
 			$s->price = $this->input->post('price', TRUE);
 			
 			//price in () should be match with the id of the lable that is used to input the phone number in crete.php file
@@ -73,7 +75,7 @@ class Supplies extends CI_Controller {
 				$data['errors'] = $s->error;
 			}
 		}
-		$data['suuply'] = $s;
+		$data['supply'] = $s;
 		$data['title']= 'Create Supply';
 		$this->load->view('supplies/create',$data);
 	}
@@ -89,7 +91,7 @@ class Supplies extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$s->fdescription = $this->input->post('description', TRUE);
+			$s->name = $this->input->post('name', TRUE);
 			$s->price = $this->input->post('price', TRUE);
 
 			if($s->save())

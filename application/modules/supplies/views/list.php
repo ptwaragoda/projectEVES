@@ -16,7 +16,7 @@
 			<thead>
 				<tr>
 					<td>Supply ID</td>
-					<td>Description</td>
+					<td>Name</td>
 					<td>Price</td>
 					<td>Actions</td>
 				</tr>
@@ -25,7 +25,7 @@
 				<?foreach($supplies->all as $s):?>
 					<tr>
 						<td><a href="<?=site_url('supplies/view/'.$s->id)?>"><?=$s->id?></a></td>
-						<td><?=$s->description?></td>
+						<td><?=$s->name?></td>
 						<td><?=$s->price?></td>						
 						<td>
 							<a href="<?=site_url('supplies/edit/'.$s->id)?>">Edit</a> | 

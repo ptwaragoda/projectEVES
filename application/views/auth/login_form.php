@@ -89,7 +89,7 @@
 
 <!-- Login form area -->
 <div class="loginWrapper">
-	<div class="loginLogo"><?/*<img src="images/loginLogo.png" alt="" />*/?></div>
+	<div class="loginLogo"><img src="<?= site_url('public/images/loginLogo.png')?>" alt="" /></div>
     <div class="loginPanel">
         <div class="head"><h5 class="iUser">Login</h5></div>
         <?=form_open(current_url(),array('id'=>'valid','class'=>'mainForm'))?>

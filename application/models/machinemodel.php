@@ -11,7 +11,7 @@ class Machinemodel extends DataMapper {
 	    	'rules' => array('required','trim'),
 	    )
 	);
-
+//TODO: make sure to add another field call visibility so you can delete brands
     function __construct($id = NULL)
     {
         parent::__construct();

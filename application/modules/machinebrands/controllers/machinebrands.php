@@ -47,12 +47,12 @@ class Machinebrands extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$mb->machine_brand_name = $this->input->post('machine_brand_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
-			$mb->machine_brand_serialnum = $this->input->post('machine_brand_serialnum', TRUE);
+			$mb->name = $this->input->post('name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
+			$mb->serial_number = $this->input->post('serial_number', TRUE);
 
 			if($mb->save())
 			{
-				$this->session->set_flashdata('success', 'The machine brand was successfully created');
+				$this->session->set_flashdata('success', 'The Machine Brand was Successfully Created');
 				redirect('machinebrands');
 			}
 			else
@@ -77,12 +77,12 @@ class Machinebrands extends CI_Controller {
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$mb->machine_brand_name = $this->input->post('machine_brand_name', TRUE);
-			$mb->machine_brand_serialnum = $this->input->post('machine_brand_serialnum', TRUE);
+			$mb->name = $this->input->post('name', TRUE);
+			$mb->serial_number = $this->input->post('serial_number', TRUE);
 
 			if($mb->save())
 			{
-				$this->session->set_flashdata('success', 'The Machine Brand was successfully updated');
+				$this->session->set_flashdata('success', 'The Machine Brand was Successfully Updated');
 				redirect($this->uri->uri_string());
 			}
 			else

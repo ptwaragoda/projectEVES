@@ -3,7 +3,7 @@
 <?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
 	<fieldset>
 		<div class="rowElem noborder">
-			<?=form_label('Machine Brand name','machine_brand_name')?>
+			<?=form_label('Brand Name','machine_brand_name')?>
 			<div class="formRight">
 				<?=form_input('machine_brand_name',$this->input->post('machine_brand_name'))?>
 			</div>
@@ -12,7 +12,7 @@
 		</div>
 
 		<div class="rowElem">
-			<?=form_label('Machine Brand Serial Number','machine_brand_serialnum')?>
+			<?=form_label('Brand Serial Number','machine_brand_serialnum')?>
 			<div class="formRight">
 				<?=form_input('machine_brand_serialnum',$this->input->post('machine_brand_serialnum'))?>
 			</div>

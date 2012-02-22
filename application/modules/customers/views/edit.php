@@ -57,6 +57,7 @@
 			<div class="fix"></div>
 		</div>
 		<?=form_submit('submit','Update Customer','class="greyishBtn submitForm"')?>
+		<a href="<?=site_url('customers')?>" title="Customers List" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to Customers List</span></a>
  </fieldset>
 <?=form_close()?>
 

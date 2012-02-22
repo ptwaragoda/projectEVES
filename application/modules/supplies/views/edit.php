@@ -13,11 +13,11 @@
 <?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
 	<fieldset>
 		<div class="rowElem noborder">
-			<?=form_label('Description','description')?>
+			<?=form_label('Name','name')?>
 			<div class="formRight">
-				<?=form_input('description',$supply->description)?>
+				<?=form_input('name',$supply->name)?>
 			</div>
-			<?=(isset($errors) && $errors->description)?$errors->description:''?>
+			<?=(isset($errors) && $errors->name)?$errors->name:''?>
 			<div class="fix"></div>
 		</div>
 
@@ -32,9 +32,8 @@
 
 		
 		<?=form_submit('submit','Update Supply','class="greyishBtn submitForm"')?>
-		<br/>
-		<a href="<?=site_url('supplies')?>" title="Done Editing" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/middlenav/check.png" alt="" class="icon" /><span>Done Editing</span></a>
 		
+		<a href="<?=site_url('supplies')?>" title="Supplies List" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to Supplies List</span></a>
 
  </fieldset>
 <?=form_close()?>

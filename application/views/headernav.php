@@ -1,6 +1,6 @@
 <!-- Header -->
 <div id="header" class="wrapper">
-    <div class="logo"><a href="/" title=""><?/*<img src="<?=base_url()?>public/images/loginLogo.png" alt="" />*/?></a></div>
+    <div class="logo"><a href="/" title=""><img src="<?= site_url('public/images/loginLogo.png')?>" alt="" /></a></div>
     <div class="middleNav">
     	<ul>
         	<?/*<li class="iMes"><a href="#" title=""><span>Support tickets</span></a><span class="numberMiddle">9</span></li>

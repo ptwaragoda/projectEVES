@@ -13,20 +13,20 @@
 <?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
 	<fieldset>
 		<div class="rowElem noborder">
-			<?=form_label('Machine Brand name','machine_brand_name')?>
+			<?=form_label('Brand name','name')?>
 			<div class="formRight">
-				<?=form_input('machine_brand_name',$machinebrands->machine_brand_name)?>
+				<?=form_input('name',$machinebrands->name)?>
 			</div>
-			<?=(isset($errors) && $errors->machine_brand_name)?$errors->machine_brand_name:''?>
+			<?=(isset($errors) && $errors->name)?$errors->name:''?>
 			<div class="fix"></div>
 		</div>
 
 		<div class="rowElem">
-			<?=form_label('Machine Brand Serial Number','machine_brand_serialnum')?>
+			<?=form_label('Brand Serial Number','serial_number')?>
 			<div class="formRight">
-				<?=form_input('machine_brand_serialnum',$machinebrands->machine_brand_serialnum)?>
+				<?=form_input('serial_number',$machinebrands->serial_number)?>
 			</div>
-			<?=(isset($errors) && $errors->machine_brand_serialnum)?$errors->machine_brand_serialnum:''?>
+			<?=(isset($errors) && $errors->serial_number)?$errors->serial_number:''?>
 			<div class="fix"></div>
 		</div>
 		<?=form_submit('submit','Update Machine Brand','class="greyishBtn submitForm"')?>
