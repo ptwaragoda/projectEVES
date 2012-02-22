@@ -28,6 +28,8 @@ class Machines extends CI_Controller {
 		if($machineId == NULL) show_error("You cannot access this page directly");
 
 		$m = new Machine();
+		$m->include_related('status',array('name'));
+		$m->include_related('machinemodel',array('name'));
 		$m->get_by_id($machineId);
 
 		if(!$m->exists()) show_error('The machine you are trying to view does not exist');

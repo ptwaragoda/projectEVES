@@ -15,12 +15,12 @@
 		<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
 			<thead>
 				<tr>
-					<td>Machine ID</td>
-					<td>Machine Name</td>
-					<td>Machine Cover Square Feet</td>
-					<td>Machine Purchase Date</td>
-					<td>Machine Serial Number</td>
-					<td>Machine Status</td>
+					<td>ID</td>
+					<td>Name</td>
+					<td>Cover Square Feet</td>
+					<td>Purchase Date</td>
+					<td>Serial Number</td>
+					<td>Status</td>
 					<td>Machine Model</td>
 					<td>Actions</td>
 				</tr>
