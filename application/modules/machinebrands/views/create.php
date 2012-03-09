@@ -1,22 +1,22 @@
 <?$this->load->view('header')?>
         	
-<?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
+<?=form_open(current_url(),array('class'=>'mainForm'))?>
 	<fieldset>
 		<div class="rowElem noborder">
 			<?=form_label('Brand Name','machine_brand_name')?>
 			<div class="formRight">
-				<?=form_input('machine_brand_name',$this->input->post('machine_brand_name'))?>
+				<?=form_input('name',$this->input->post('name'))?>
 			</div>
-			<?=(isset($errors) && $errors->machine_brand_name)?$errors->machine_brand_name:''?>
+			<?=(isset($errors) && $errors->name)?$errors->name:''?>
 			<div class="fix"></div>
 		</div>
 
 		<div class="rowElem">
-			<?=form_label('Brand Serial Number','machine_brand_serialnum')?>
+			<?=form_label('Brand Serial Number','serial_number')?>
 			<div class="formRight">
-				<?=form_input('machine_brand_serialnum',$this->input->post('machine_brand_serialnum'))?>
+				<?=form_input('serial_number',$this->input->post('serial_number'))?>
 			</div>
-			<?=(isset($errors) && $errors->machine_brand_serialnum)?$errors->machine_brand_serialnum:''?>
+			<?=(isset($errors) && $errors->serial_number)?$errors->serial_number:''?>
 			<div class="fix"></div>
 		</div>
 		<?=form_submit('submit','Create Machine Brand','class="greyishBtn submitForm"')?>
