@@ -1,7 +1,7 @@
 <?
 function formatPrice($price, $currencySymbol = '$')
 {
-	return $currencySymbol.number_format($price, 2, '.', ',');
+	return $currencySymbol.number_format((double)$price, 2, '.', ',');
 }
 
 function getYoutubeVideo($url, $height='187', $width='280')

@@ -29,6 +29,7 @@
 					<td>End Date</td>
 					<td>Created By</td>
 					<td>Total</td>
+					<td>Draft</td>
 					<td>Actions</td>
 				</tr>
 			</thead>
@@ -52,10 +53,11 @@
 						<td><?=date('Y-m-d',strtotime($t->end_date))?></td>
 						<td><?=$t->user->get()->username?></td>
 						<td><?=formatPrice($t->final_total)?></td>
+						<td><?=$t->is_draft?'Yes':'No'?></td>
 						<td>
-							<a href="<?=site_url('transaction/view/'.$t->id)?>">View</a> | 
-							<a href="<?=site_url('transaction/edit/'.$t->id)?>">Edit</a> | 
-							<a href="<?=site_url('transaction/delete/'.$t->id)?>">Delete</a>
+							<a href="<?=site_url('transactions/view/'.$t->id)?>">View</a> | 
+							<a href="<?=site_url('transactions/edit/'.$t->id)?>">Edit</a> | 
+							<a href="<?=site_url('transactions/delete/'.$t->id)?>">Delete</a>
 						</td>
 					</tr>
 				<?endforeach?>

@@ -1,0 +1,24 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Migration_Add_draft_to_transactions_table extends	Migration {
+
+	function up() 
+	{
+		$this->migrations->set_verbose(true);
+		
+		print "Adding column 'is_draft' to table 'transactions'...<br/>";
+		if (!$this->db->field_exists('is_draft','transactions'))
+		{	
+			$this->dbforge->add_column('transactions',array(
+				'is_draft' => array('type' => 'INT', 'constraint'=>'1', 'unsigned' => TRUE, 'null' => FALSE)
+			));
+		}
+		
+	}
+	
+	function down()
+	{
+		$this->dbforge->drop_column('transactions', 'is_draft');
+	}
+	
+}

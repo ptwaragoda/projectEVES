@@ -9,6 +9,8 @@ class Transactions extends CI_Controller {
 
 	function index()
 	{
+		//$this->output->enable_profiler(TRUE);
+
 		$t = new Transaction();
 		$t->where_related_user('id',$this->tank_auth->get_user_id())->order_by('created_on','desc');
 
@@ -35,26 +37,21 @@ class Transactions extends CI_Controller {
 		$this->load->view('transactions/list',$data);
 	}
 
-	//reason we set the customerid to null is in case no id is passed to the page
-	//we can control the error message
-	function view($customerId = NULL)
+	function view($transactionId = NULL)
 	{
-		// This is where we "view" a customer
 
-		//$this->output->enable_profiler(TRUE); // This shows profile information.
+		if($transactionId == NULL) show_error("You cannot access this page directly");
 
-		if($customerId == NULL) show_error("You cannot access this page directly");
+		$t = new Transaction();
+		$t->get_by_id($transactionId);
+		if(!$t->exists()) show_error('The transaction you are trying to view does not exist');
 
-		$c = new Customer();
-		$c->get_by_id($customerId);
-		//$c->where('id',$customerId)->get(); This is the same as above
+		if($t->user_id != $this->tank_auth->get_user_id()) show_error('You do not have access to view this transaction');
 
-		if(!$c->exists()) show_error('The customer you are trying to view does not exist');
-
-		$data['title'] = 'Customer: '.$c->getFullName();
-		$data['customer'] = $c;
-		$data['transactions'] = $c->transactions->count();
-		$this->load->view('customers/view',$data); // This is the details view
+		$data['title'] = 'Transaction: '.$t->id;
+		$data['transaction'] = $t;
+		$data['lineItems'] = $t->machinelineitem->get();
+		$this->load->view('transactions/view',$data);
 	}
 	
 	function create()
@@ -69,6 +66,7 @@ class Transactions extends CI_Controller {
 			$t->start_date = $this->input->post('start_date', TRUE);
 			$t->end_date = $this->input->post('end_date', TRUE);
 			$t->tax = $this->input->post('tax', TRUE);
+			$t->is_draft = 1;
 
 			$relatedObjects = array();
 
@@ -130,6 +128,21 @@ class Transactions extends CI_Controller {
 		$data['customer'] = $c;
 		$data['heading']= 'Edit Customer';
 		$this->load->view('customers/edit',$data);
+	}
+
+	function finalize($transationId = NULL)
+	{
+		if($transacctionId == NULL) show_error('You cannot access this page directly');
+
+		$t = new Transaction();
+		$t->get_by_id($transactionId);
+		if(!$t->exists()) show_error('The transaction you are trying to access does not exist');
+
+		$t->is_draft = 0;
+
+		$t->save();
+
+		redirect('transactions/view/'.$t->id);
 	}
 
 	function delete($customerId = NULL)
