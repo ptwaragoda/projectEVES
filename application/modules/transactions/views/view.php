@@ -73,8 +73,15 @@
             <?foreach($lineItems->all as $l):?>
             <tr class="noborder">
                 <td width="170">
-                    <?$machine = $l->machine->get()?>
-                    <?=$machine->exists()?$machine->name:'Not Found'?>
+                    <?
+                        /*$machine = $l->machine->get();
+                        echo $machine->name.' (';
+                        $model = $machine->machinemodel->get();
+                        echo $model->name.'/';
+                        $brand = $model->machinebrand->get();
+                        echo $brand->name.')';*/
+                    ?>
+                    <?=$l->machine_name?> (<?=$l->machine_machinemodel_name?>/<?=$l->machine_machinemodel_machinebrand_name?>)
                 </td>
                 <td><?=date('F d, Y', strtotime($l->created_on))?></td>
                 <td>$<?=number_format($l->price,2)?></td>

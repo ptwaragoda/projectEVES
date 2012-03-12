@@ -83,10 +83,12 @@ class Transactions extends CI_Controller {
 			/*$ml->quantity = $this->input->post('quantity');*/
 			$ml->price = $this->input->post('price');
 
-			//TODO: Adjust the price of the transaction as well
-
 			if($ml->save($relatedObjects))
 			{
+				$output = $this->_adjustTotal($t->id);
+
+				if($output['status']== 'error') $this->session->set_flashdata('error',$output['message']);
+
 				$this->session->set_flashdata('success','Machine Line Item successfully added');
 				redirect(current_url());
 			}
@@ -97,15 +99,50 @@ class Transactions extends CI_Controller {
 
 		}
 
+		$lineItems = new Machinelineitem();
+		$lineItems->include_related('machine', 'name');
+		$lineItems->include_related('machine/machinemodel', 'name');
+		$lineItems->include_related('machine/machinemodel/machinebrand', 'name');
+		$lineItems->where_related_transaction('id',$t->id);
+		$lineItems->order_by('created_on','asc');
+		$lineItems->get();
+
 		$data['title'] = 'Transaction: '.$t->id;
 		$data['transaction'] = $t;
-		$data['lineItems'] = $t->machinelineitem->get();
+		$data['lineItems'] = $lineItems;
 		$this->load->view('transactions/view',$data);
 	}
 	
 	private function _adjustTotal($transactionId = NULL)
 	{
 		//TODO: This is where we will adjust the total of the transaction
+
+		if($transactionId == NULL) return array('status'=>'error', 'message' => 'The transaction ID cannot be null');
+
+		$t = new Transaction();
+		$t->get_by_id($transactionId);
+		if(!$t->exists()) return array('status'=>'error', 'message' => 'The transaction does not exist');
+
+		if($t->user_id != $this->tank_auth->get_user_id()) return array('status'=>'error', 'message' => 'The transaction does not belong to you');
+
+		$machinelineitems = $t->machinelineitem->get();
+		$total = 0;
+
+		foreach($machinelineitems->all as $ml)
+		{
+			$total += $ml->price;
+		}
+
+		$t->final_total = $total;
+		if($t->save())
+		{
+			return array('status'=>'success');
+		}
+		else
+		{
+			return array('status'=>'error', 'message' => $t->error->string);
+		}
+		
 	}
 
 	function create()
@@ -166,6 +203,10 @@ class Transactions extends CI_Controller {
 
 		if($l->delete())
 		{
+			$output = $this->_adjustTotal($transaction->id);
+
+			if($output['status']== 'error') $this->session->set_flashdata('error',$output['message']);
+
 			$this->session->set_flashdata('success', 'The machine line item was successfully deleted');
 		}
 		else

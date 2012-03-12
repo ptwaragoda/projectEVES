@@ -26,10 +26,10 @@ class Transaction extends DataMapper {
 	    	'label' => 'Total',
 	    	'rules' => array('trim','numeric')
 		),
-		'tax' => array(
+		/*'tax' => array(
 	    	'label' => 'Tax',
 	    	'rules' => array('required','trim','numeric')
-		),
+		),*/
 		'customer' => array(
 			'label' => 'Customer',
 			'rules' => array('required')
