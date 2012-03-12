@@ -220,12 +220,13 @@ input[type=submit], input[type=reset], input[type=button], button, .button { fon
 .leftNav ul li.tables a span { background-image: url(../images/icons/dark/frames.png); }
 .leftNav ul li.cal a span { background-image: url(../images/icons/dark/dayCalendar.png); }
 .leftNav ul li.errors a span { background-image: url(../images/icons/dark/alert.png); }
-.leftNav ul li.files a span { background-image: url(../images/icons/dark/files.png); }
+.leftNav ul li.files a span { background-image: url(../images/icons/dark/docs.png); }
 .leftNav ul li.login a span { background-image: url(../images/icons/dark/user.png); }
-.leftNav ul li.pic a span { background-image: url(../images/icons/dark/blocks.png); }
+.leftNav ul li.machine a span { background-image: url(../images/icons/dark/companies.png); }
 .leftNav ul li.widgets a span { background-image: url(../images/icons/dark/full.png); }
 .leftNav ul li.contacts a span { background-image: url(../images/icons/dark/users.png); }
-
+.leftNav ul li.logout a span { background-image: url(../images/icons/dark/logoff.png); }
+.leftNav ul li.transaction a span { background-image: url(../images/icons/dark/priceTag.png); }
 .leftNav ul li a span { background-position: 10px; background-repeat: no-repeat; }
 
 

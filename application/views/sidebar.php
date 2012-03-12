@@ -2,13 +2,13 @@
 <div class="leftNav">
 	<ul id="menu">
     	<li class="dash"><a href="<?=base_url()?>" title="" class="active"><span>Dashboard</span></a></li>
-        <li class="errors"><a href="#" title="" class="exp"><span>Customers</span></a>
+        <li class="contacts"><a href="#" title="" class="exp"><span>Customers</span></a>
                 <ul class="sub">
                 <li><a href="<?=site_url('customers')?>" title="">Manage Customers</a></li>
                 <li><a href="<?=site_url('customers/create')?>" title="">Create Customer</a></li>
             </ul>
         </li>
-        <li class="errors"><a href="#" title="" class="exp"><span>Machines</span></a>
+        <li class="machine"><a href="#" title="" class="exp"><span>Machines</span></a>
                 <ul class="sub">
                 <li><a href="<?=site_url('machines')?>" title="">Manage Machines</a></li>
                 <li><a href="<?=site_url('machines/create')?>" title="">Create a Machine</a></li>
@@ -16,13 +16,13 @@
                 <li><a href="<?=site_url('machinebrands')?>" title="">Manage Machine Brands</a></li>                
                 </ul>
         </li>
-        <li class="errors"><a href="#" title="" class="exp"><span>Supplies</span></a>
+        <li class="files"><a href="#" title="" class="exp"><span>Supplies</span></a>
                 <ul class="sub">
                 <li><a href="<?=site_url('supplies')?>" title="">Manage supplies</a></li>
                 <li><a href="<?=site_url('supplies/create')?>" title="">Create Supply</a></li>
             </ul>
         </li>
-        <li class="errors"><a href="#" title="" class="exp"><span>Transactions</span></a>
+        <li class="transaction"><a href="#" title="" class="exp"><span>Transactions</span></a>
                 <ul class="sub">
                 <li><a href="<?=site_url('transactions')?>" title="">Manage transactions</a></li>
                 <li><a href="<?=site_url('transactions/create')?>" title="">Create Transaction</a></li>
@@ -38,6 +38,6 @@
         <li class="widgets"><a href="widgets.html" title=""><span>Widgets</span></a></li>
         <li class="files"><a href="file_manager.html" title=""><span>File manager</span></a></li>
         <li class="pic"><a href="icons.html" title=""><span>Buttons and icons</span></a></li>*/?>
-        <li class="contacts"><a href="<?=site_url('auth/logout')?>" title=""><span>Logout</span></a></li>
+        <li class="logout"><a href="<?=site_url('auth/logout')?>" title=""><span>Logout</span></a></li>
     </ul>
 </div>
