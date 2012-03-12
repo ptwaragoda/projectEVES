@@ -7,20 +7,24 @@ class Machinelineitem extends DataMapper {
 	var $table = 'Machinelineitems';
 
 	var $validation = array(
-		'name' => array(
+		/*'name' => array(
 	    	'label' => 'Machine Name',
 	    	'rules' => array('required','trim','max_size' => 255)
 		),
 		'quantity' => array(
 	    	'label' => 'Quantity',
 	    	'rules' => array('required','trim','integer')
-		),
+		),*/
 		'price' => array( // This is a field validation
 	    	'label' => 'Machine Price',
-	    	'rules' => array('required','trim','decimal')
+	    	'rules' => array('required','trim','numeric')
 		),
 		'transaction' => array( // This is a relationship validation
 	    	'label' => 'Transaction',
+	    	'rules' => array('required')
+		),
+		'machine' => array( // This is a relationship validation
+	    	'label' => 'Machine',
 	    	'rules' => array('required')
 		),
 	);

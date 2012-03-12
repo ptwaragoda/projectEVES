@@ -39,7 +39,6 @@ class Transactions extends CI_Controller {
 
 	function view($transactionId = NULL)
 	{
-
 		if($transactionId == NULL) show_error("You cannot access this page directly");
 
 		$t = new Transaction();
@@ -48,12 +47,67 @@ class Transactions extends CI_Controller {
 
 		if($t->user_id != $this->tank_auth->get_user_id()) show_error('You do not have access to view this transaction');
 
+		$currentMachines = new Machine();
+		$currentMachines->where_related('machinelineitem/transaction', 'id', $t->id)->get();
+
+		$currentMachinesArray = array();
+		foreach($currentMachines->all as $m)
+		{
+			$currentMachinesArray[] = $m->id;
+		}
+
+		$m = new Machine();
+		
+		if(count($currentMachinesArray))
+		{
+			$m->group_start(); // Query grouping (look up in http://datamapper.wanwizard.eu/pages/get.html)
+			$m->where_not_in('id', $currentMachinesArray);
+			$m->group_end();
+		}
+		$m->where_related_status('id','1')->order_by('name','asc')->get();
+		$data['machines'] = $m;
+
+		if($this->input->server('REQUEST_METHOD') == 'POST')
+		{
+			$relatedObjects = array();
+
+			$relatedObjects[] = $t;
+
+			$machine = new Machine();
+			$machine->where_related_status('id','1');
+			$machine->where('id',$this->input->post('machine'));
+			$machine->get();
+			if($machine->exists()) $relatedObjects[] = $m;
+
+			$ml = new Machinelineitem();
+			/*$ml->quantity = $this->input->post('quantity');*/
+			$ml->price = $this->input->post('price');
+
+			//TODO: Adjust the price of the transaction as well
+
+			if($ml->save($relatedObjects))
+			{
+				$this->session->set_flashdata('success','Machine Line Item successfully added');
+				redirect(current_url());
+			}
+			else
+			{
+				$data['errors'] = $ml->error->string;
+			}
+
+		}
+
 		$data['title'] = 'Transaction: '.$t->id;
 		$data['transaction'] = $t;
 		$data['lineItems'] = $t->machinelineitem->get();
 		$this->load->view('transactions/view',$data);
 	}
 	
+	private function _adjustTotal($transactionId = NULL)
+	{
+		//TODO: This is where we will adjust the total of the transaction
+	}
+
 	function create()
 	{
 		//TODO: We show the form and also create a customer here.
@@ -96,6 +150,29 @@ class Transactions extends CI_Controller {
 		$data['transaction'] = $t;
 		$data['title']= 'Create Transaction';
 		$this->load->view('transactions/create',$data);
+	}
+
+	function deleteLineItem($lineItemId = NULL)
+	{
+		if($lineItemId == NULL) show_error('You cannot access this page directly');
+
+		$l = new Machinelineitem();
+		$l->get_by_id($lineItemId);
+		if(!$l->exists()) show_error('The line item you are trying to delete does not exist');
+
+		$transaction = $l->transaction->get();
+
+		if($transaction->user_id != $this->tank_auth->get_user_id()) show_error('The line item that you are trying to delete does not belong to you');
+
+		if($l->delete())
+		{
+			$this->session->set_flashdata('success', 'The machine line item was successfully deleted');
+		}
+		else
+		{
+			$this->session->set_flashdata('errors', $l->error->string);
+		}
+		redirect('transactions/view/'.$transaction->id);
 	}
 
 	function edit($customerId = NULL)
