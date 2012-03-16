@@ -248,15 +248,30 @@ class Transactions extends CI_Controller {
 		$this->load->view('customers/edit',$data);
 	}
 
-	function finalize($transationId = NULL)
+	function finalize($transactionId = NULL)
 	{
-		if($transacctionId == NULL) show_error('You cannot access this page directly');
+		if($transactionId == NULL) show_error('You cannot access this page directly');
 
 		$t = new Transaction();
 		$t->get_by_id($transactionId);
 		if(!$t->exists()) show_error('The transaction you are trying to access does not exist');
 
 		$t->is_draft = 0;
+
+		$t->save();
+
+		redirect('transactions/view/'.$t->id);
+	}
+
+	function processPayment($transactionId = NULL)
+	{
+		if($transactionId == NULL) show_error('You cannot access this page directly');
+
+		$t = new Transaction();
+		$t->get_by_id($transactionId);
+		if(!$t->exists()) show_error('The transaction you are trying to access does not exist');
+
+		$t->is_paid = 1;
 
 		$t->save();
 
