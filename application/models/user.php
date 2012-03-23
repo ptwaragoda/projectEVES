@@ -9,6 +9,24 @@ class User extends DataMapper {
     {
         parent::__construct();
     }
+
+    function is_admin()
+    {
+    	$group = $this->group->get();
+    	return ($group->exists() && $group->id == '1');
+    }
+
+    function is_manager()
+    {
+    	$group = $this->group->get();
+    	return ($group->exists() && $group->id == '2');
+    }
+
+    function is_agent()
+    {
+    	$group = $this->group->get();
+    	return ($group->exists() && $group->id == '3');
+    }
 	
 }
 

@@ -19,6 +19,9 @@
 					<td>Last name</td>
 					<td>Phone</td>
 					<td>Company</td>
+					<?if($this->tank_auth->is_admin() || $this->tank_auth->is_manager()):?>
+						<td>Agent</td>
+					<?endif?>
 					<td>Actions</td>
 				</tr>
 			</thead>
@@ -29,6 +32,9 @@
 						<td><?=$c->last_name?></td>
 						<td><?=$c->phone?></td>
 						<td><?=$c->company?></td>
+						<?if($this->tank_auth->is_admin() || $this->tank_auth->is_manager()):?>
+							<td><?=$c->user_username?></td>
+						<?endif?>
 						<td>
 							<a href="<?=site_url('customers/edit/'.$c->id)?>">Edit</a> | 
 							<a href="<?=site_url('customers/delete/'.$c->id)?>">Delete</a>

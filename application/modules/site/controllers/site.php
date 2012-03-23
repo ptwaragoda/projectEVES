@@ -14,6 +14,23 @@ class Site extends CI_Controller {
 		$this->load->view('homepage',$data);
 	}
 
+	//Testing example
+	function test()
+	{
+		$this->load->library('unit_test');
+
+		$u = new User();
+		$u->get_by_id(1);
+
+		$test = $u->is_admin();
+
+		$expected_result = TRUE;
+
+		$test_name = 'User "Hasitha" should be an admin';
+
+		echo $this->unit->run($test, $expected_result, $test_name);
+	}
+
 	/*function home()
 	{
 		$userId = $this->tank_auth->get_user_id();

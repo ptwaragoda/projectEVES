@@ -15,9 +15,15 @@ class Customers extends CI_Controller {
 
 	function index()
 	{
-		//TODO: This is the default function. This should ideally list customers
+		$u = new User();
+		$u->get_by_id($this->tank_auth->get_user_id());
 
 		$c = new Customer();
+
+		if($u->is_agent())
+			$c->where_related_user('id', $u->id);
+
+		$c->include_related('user','username');
 		$c->order_by('created_on','desc')->get();
 
 		//customers is the index name which could be any name and this name 

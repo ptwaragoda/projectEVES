@@ -639,6 +639,27 @@ class Tank_auth
 					$this->ci->config->item('login_attempt_expire', 'tank_auth'));
 		}
 	}
+
+	function is_admin()
+	{
+		$u = new User();
+		$u->get_by_id($this->ci->tank_auth->get_user_id());
+		return $this->ci->tank_auth->is_logged_in() && $u->is_admin();
+	}
+
+	function is_manager()
+	{
+		$u = new User();
+		$u->get_by_id($this->ci->tank_auth->get_user_id());
+		return $this->ci->tank_auth->is_logged_in() && $u->is_manager();
+	}
+
+	function is_agent()
+	{
+		$u = new User();
+		$u->get_by_id($this->ci->tank_auth->get_user_id());
+		return $this->ci->tank_auth->is_logged_in() && $u->is_agent();
+	}
 }
 
 /* End of file Tank_auth.php */

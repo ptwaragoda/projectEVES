@@ -4,6 +4,16 @@ function formatPrice($price, $currencySymbol = '$')
 	return $currencySymbol.number_format((double)$price, 2, '.', ',');
 }
 
+function dashboardLink($text,$link,$image,$extraClass="mr10")
+{
+	return '
+		<a href="'.$link.'" title="'.$text.'" class="btn55 '.$extraClass.'">
+        	<img src="'.base_url().'public/images/icons/middlenav/'.$image.'" alt="'.$text.'" />
+        	<span>'.$text.'</span>
+       	</a>
+	';
+}
+
 function getYoutubeVideo($url, $height='187', $width='280')
 {
 	 return '<iframe allowfullscreen="" frameborder="0" height="'.$height.'" src="'.$url.'" width="'.$width.'"></iframe>';
