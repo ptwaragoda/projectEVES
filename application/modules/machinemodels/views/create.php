@@ -21,32 +21,24 @@
                 </div>
 
                 Oops sorry. That action is not valid, or our servers have gone bonkers*/?>
-<?/*<?if(isset($errors)):?>
+<?if(isset($errors)):?>
 	<div><?=$errors->string?></div>
-<?endif?>*/?>
+<?endif?>
 
 <?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
 	<fieldset>
-		<? /*<div class="rowElem noborder">
-			<?=form_label('Brand Name','brand_name')?>
-			<div class="formRight">
-				<?=form_input('brand_name',$this->input->post('brand_name'))?>
-			</div>
-			<?=(isset($errors) && $errors->brand_name)?$errors->brand_name:''?>
-			<div class="fix"></div>
-		</div> */ ?>
-
+	
 		<div class="rowElem">
-			<?=form_label('Brand Name',' brand_name')?>
+			<?=form_label('Brand Name','machinebrand')?>
 			<div class="formRight">
-				<select data-placeholder="Choose a Brand" id="brand_name" name="brand_name">
+				<select data-placeholder="Choose a Brand" id="machinebrand" name="machinebrand">
 					<option value="">Select a Brand</option>
 					<?foreach($machinebrand->all as $mb):?>
-						<option value="<?=$mb->id?>"><?=$mb->name?></option>
+						<option value="<?=$mb->id?>" <?=$mb->id == $this->input->post('machinebrand')?' selected="selected"':''?>><?=$mb->name?></option>
 					<?endforeach?>
 				</select>
 			</div>
-			<?=(isset($errors) && $errors->customer)?$errors->brand_name:''?>
+			<?=(isset($errors) && $errors->machinebrand)?$errors->machinebrand:''?>
 			<div class="fix"></div>
 		</div>
 

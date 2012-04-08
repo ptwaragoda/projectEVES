@@ -66,12 +66,12 @@ class Machinemodels extends CI_Controller {
 			//$mm->brand_name = $this->input->post('brand_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
 			$mb = new Machinebrand();
 			$mb->get_by_id($this->input->post('machinebrand', TRUE));
-			if($mb->exists()) $relatedOjbects[] = $mb;
+			if($mb->exists()) $relatedObjects[] = $mb;
 
 
-			$mm->model_name = $this->input->post('model_name', TRUE);			
+			$mm->name = $this->input->post('model_name', TRUE);			
 
-			if($mm->save())
+			if($mm->save($relatedObjects))
 			{
 				$this->session->set_flashdata('success', 'The Machine model was successfully created');
 				redirect('machinemodels');
@@ -95,17 +95,25 @@ class Machinemodels extends CI_Controller {
 		if($machinemodel_Id == NULL) show_error("You cannot access this page directly");
 
 		$mm = new Machinemodel();
-		$mm->include_related('machinebrand',array('name'));
+		$mm->include_related('machinebrand',array('name','id'));
 		$mm->get_by_id($machinemodel_Id);
+
+		$relatedObjects = array();
+		$mb = new Machinebrand();
+		$mb->order_by('name','asc')->get();
+
 		if(!$mm->exists()) show_error('The Machine Model you are trying to edit does not exist');
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
 			$mm->name = $this->input->post('name', TRUE);
-			$mm->machinebrand_name = $this->input->post('machinebrand_name', TRUE);
+			
+			$mb = new Machinebrand();
+			$mb->get_by_id($this->input->post('machinebrand', TRUE));
+			if($mb->exists()) $relatedObjects[] = $mb;
 			
 
-			if($mm->save())
+			if($mm->save($relatedObjects))
 			{
 				$this->session->set_flashdata('success', 'The Machine Model was successfully updated');
 				redirect($this->uri->uri_string());
@@ -116,6 +124,7 @@ class Machinemodels extends CI_Controller {
 			}
 		}
 		$data['machinemodel'] = $mm;
+		$data['machinebrand'] = $mb;
 		$data['heading']= 'Edit Machine Model';
 		$this->load->view('machinemodels/edit',$data);
 	}

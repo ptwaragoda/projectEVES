@@ -12,6 +12,23 @@
 
 <?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
 	<fieldset>
+		
+		<div class="rowElem">
+			<?=form_label('Brand Name','machinebrand')?>
+			<div class="formRight">
+				<select data-placeholder="Choose a Brand" id="machinebrand" name="machinebrand">
+					<option value="<?$machinemodel->machinebrand_id?>"><?=$machinemodel->machinebrand_name?></option>
+					<option value="" disabled>------------</option>
+					<?foreach($machinebrand->all as $mb):?>
+						<option value="<?=$mb->id?>" <?=$mb->id == $this->input->post('machinebrand')?' selected="selected"':''?>><?=$mb->name?></option>
+					<?endforeach?>
+				</select>
+			</div>
+			<?=(isset($errors) && $errors->machinebrand)?$errors->machinebrand:''?>
+			<div class="fix"></div>
+		</div>
+
+
 		<div class="rowElem noborder">
 			<?=form_label('Model Name','name')?>
 			<div class="formRight">
@@ -21,7 +38,7 @@
 			<div class="fix"></div>
 		</div>
 
-		<div class="rowElem noborder">
+		<? /*<div class="rowElem noborder">
 			<?=form_label('Brand Name','machinebrand_name')?>
 			<div class="formRight">
 				<?=form_input('machinebrand_name',$machinemodel->machinebrand_name)?>
@@ -31,7 +48,7 @@
 -->
 			<?=(isset($errors) && $errors->machinebrand_name)?$errors->machinebrand_name:''?>
 			<div class="fix"></div>
-		</div>
+		</div> */ ?>
 		<?=form_submit('submit','Update Machine Model','class="greyishBtn submitForm"')?>
  
  <a href="<?=site_url('machinemodels')?>" title="Machine Model List" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to Machine Model List</span></a>

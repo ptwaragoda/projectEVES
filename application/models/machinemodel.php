@@ -6,9 +6,10 @@ class Machinemodel extends DataMapper {
 	var $has_many = array('machine');
 
 	var $validation = array(
-		'name' => array(
+
+		'machinebrand' => array(
 	    	'label' => 'Brand Name',
-	    	'rules' => array('required','trim'),
+	    	'rules' => array('required'),
 	    )
 	);
 //TODO: make sure to add another field call visibility so you can delete brands
