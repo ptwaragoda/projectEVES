@@ -27,12 +27,26 @@
 
 <?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
 	<fieldset>
-		<div class="rowElem noborder">
+		<? /*<div class="rowElem noborder">
 			<?=form_label('Brand Name','brand_name')?>
 			<div class="formRight">
 				<?=form_input('brand_name',$this->input->post('brand_name'))?>
 			</div>
 			<?=(isset($errors) && $errors->brand_name)?$errors->brand_name:''?>
+			<div class="fix"></div>
+		</div> */ ?>
+
+		<div class="rowElem">
+			<?=form_label('Brand Name',' brand_name')?>
+			<div class="formRight">
+				<select data-placeholder="Choose a Brand" id="brand_name" name="brand_name">
+					<option value="">Select a Brand</option>
+					<?foreach($machinebrand->all as $mb):?>
+						<option value="<?=$mb->id?>"><?=$mb->name?></option>
+					<?endforeach?>
+				</select>
+			</div>
+			<?=(isset($errors) && $errors->customer)?$errors->brand_name:''?>
 			<div class="fix"></div>
 		</div>
 

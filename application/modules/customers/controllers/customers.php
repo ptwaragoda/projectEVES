@@ -7,12 +7,6 @@ class Customers extends CI_Controller {
 		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 	}
 
-	function showsuccess()
-	{
-		$this->session->set_flashdata('success',date('Y-m-d H:i:s'));
-		redirect('customers');
-	}
-
 	function index()
 	{
 		$u = new User();

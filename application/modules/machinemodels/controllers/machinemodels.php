@@ -31,7 +31,7 @@ class Machinemodels extends CI_Controller {
 
 	//reason we set the customerid to null is in case no id is passed to the page
 	//we can control the error message
-	function view($customerId = NULL)
+	/*function view($customerId = NULL)
 	{
 		// This is where we "view" a customer
 
@@ -49,16 +49,26 @@ class Machinemodels extends CI_Controller {
 		$data['customer'] = $c;
 		$data['transactions'] = $c->transactions->count();
 		$this->load->view('customers/view',$data); // This is the details view
-	}
+	}*/
 	
 	function create()
 	{
 		//TODO: We show the form and also create a customer here.
 		$mm = new Machinemodel();
+		$relatedObjects = array();
+
+		$mb = new Machinebrand();
+		$mb->order_by('name','asc')->get();
+		
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$mm->brand_name = $this->input->post('brand_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
+			//$mm->brand_name = $this->input->post('brand_name', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
+			$mb = new Machinebrand();
+			$mb->get_by_id($this->input->post('machinebrand', TRUE));
+			if($mb->exists()) $relatedOjbects[] = $mb;
+
+
 			$mm->model_name = $this->input->post('model_name', TRUE);			
 
 			if($mm->save())
@@ -71,7 +81,10 @@ class Machinemodels extends CI_Controller {
 				$data['errors'] = $mm->error;
 			}
 		}
+
+
 		$data['machinmodel'] = $mm;
+		$data['machinebrand'] = $mb;
 		$data['title']= 'Create Machine model';
 		$this->load->view('machinemodels/create',$data);
 	}

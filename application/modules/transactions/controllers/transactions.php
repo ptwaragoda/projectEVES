@@ -60,7 +60,7 @@ class Transactions extends CI_Controller {
 		
 		if(count($currentMachinesArray))
 		{
-			$m->group_start(); // Query grouping (look up in http://datamapper.wanwizard.eu/pages/get.html)
+			$m->group_start(); 
 			$m->where_not_in('id', $currentMachinesArray);
 			$m->group_end();
 		}

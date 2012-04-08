@@ -4,26 +4,33 @@ class Purchasesupplyorders extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-	}
-
-	function showsuccess()
-	{
-		$this->session->set_flashdata('success',date('Y-m-d H:i:s'));
-		redirect('purchasesupplyorder');
+		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 	}
 
 	function index()
 	{
-		//TODO: This is the default function. This should ideally list customers
+		$u = new User();
+		$u->get_by_id($this->tank_auth->get_user_id());
 
 		$p = new Purchasesupplyorder();
-		$p->order_by('payment_status','desc')->get();
+
+		if($u->is_agent())
+		{
+			$p->where_related_user('id', $u->id);
+		}
+		elseif($u->is_admin() || $u->is_manager())
+		{
+			$p->where('is_draft','0');
+		}
+
+		$p->include_related('user', 'username');
+		$p->order_by('created_on','desc')->get();
 		$data['purchasesupplyorders'] = $p;
 
 		$this->load->view('purchasesupplyorders/list',$data);
 	}
 
-	function view($purchasesupplyorderId = NULL)
+/*	function view($purchasesupplyorderId = NULL)
 	{
 		// This is where we "view" a customer
 
@@ -38,43 +45,46 @@ class Purchasesupplyorders extends CI_Controller {
 		$data['customer'] = $c;
 		$this->load->view('customers/view',$data); // This is the details view
 	}
-	
+	*/
 	function create()
 	{
 		//TODO: We show the form and also create a customer here.
-		$p = new Customer();
-		$s = new Purchasesupplyorder();
-		$sitem = new Supplyitem();
-		$sup = new Supply();
+		$p = new Purchasesupplyorder();
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
-			$s->start_date = $this->input->post('start_date', TRUE); //Keep in mind that the optional TRUE parameter filters out XSS
-			$s->end_date = $this->input->post('end_date', TRUE);
-			$s->payment_status = $this->input->post('payment_status', TRUE);
-			$sitem->quantity = $this->input->post('quantity', TRUE);
-			$sup->description = $this->input->post('description', TRUE);
-			$sup->price = $this->input->post('price', TRUE);
-			//phone in () should be match with the id of the lable that is used to input the phone number in crete.php file
+			//prettyPrint($_POST);exit;
+			//$p->created_on = $this->input->post('created_on', TRUE);
+			//$p->user_id = $this->input->post('user_id', TRUE);
+			$p->total = $this->input->post('total', TRUE);
+			$p->final_total = $this->input->post('tax', TRUE);
+			$p->is_draft = 1;
+			$p->user_id = $this->tank_auth->get_user_id()
+
+			$relatedObjects = array();
 
 
-			if($s->save()&&$sup->save()&&$sitem->save())
+		
+
+			if($t->save($relatedOjbects))
 			{
-				$this->session->set_flashdata('success', 'The customer was successfully created');
-				//redirect('customers/edit/'.$p->id);
+				$this->session->set_flashdata('success', 'The purchase supply order was successfully created');
+				redirect('Purchasesupplyorders');
 			}
 			else
 			{
-				$data['errors'] = $s->error;
+				$data['errors'] = $t->error;
 			}
 		}
-		$data['purchasesupplyorder'] = $s;
-		$data['supply'] = $sup;
-		$data['Supplyitem']=$sitem;
-		$data['heading']= 'Create Customer';
-		$this->load->view('purchasesupplyorders/create',$data);
-	}
+		
+		$c = new Customer();
+		$c->order_by('first_name','asc')->get();
+		$data['customers'] = $c;
 
+		$data['Purchasesupplyorder'] = $t;
+		$data['title']= 'Create Purchase Supply Order';
+		$this->load->view('Purchasesupplyorders/create',$data);
+	}
 //changed up to here 
 	function edit($customerId = NULL)
 	{

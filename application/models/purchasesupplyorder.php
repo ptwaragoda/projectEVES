@@ -15,14 +15,7 @@ class Purchasesupplyorder extends DataMapper {
 	    	'label' => 'Final Total',
 	    	'rules' => array('required','trim')
 		),
-		'end_date' => array(
-	    	'label' => 'End Date',
-	    	'rules' => array('required','trim')
-		),
-		'start_date' => array(
-	    	'label' => 'Start Date',
-	    	'rules' => array('required','trim')
-		),
+		
 	);
     function __construct($id = NULL)
     {
