@@ -54,6 +54,6 @@
 <?endif?>
 
 <br/><br/>
-<a href="<?=site_url('purchasesupplyorders/create')?>" title="Create new transaction" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Create New Transaction</span></a>
+<a href="<?=site_url('purchasesupplyorders/create')?>" title="Create new Supply Order" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Create new Supply Order</span></a>
 
 <?$this->load->view('footer')?>

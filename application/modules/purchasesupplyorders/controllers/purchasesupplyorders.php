@@ -59,7 +59,7 @@ class Purchasesupplyorders extends CI_Controller {
 			$p->total = $this->input->post('total', TRUE);
 			$p->final_total = $this->input->post('tax', TRUE);
 			$p->is_draft = 1;
-			$p->user_id = $this->tank_auth->get_user_id()
+			$p->user_id = $this->tank_auth->get_user_id();
 
 			$relatedObjects = array();
 

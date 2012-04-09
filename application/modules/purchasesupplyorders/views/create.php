@@ -1,53 +1,67 @@
-<html>
-<head>
-	<title>Create Customer</title>
-	<style type="text/css">
-		div.error{
-			color:red;
-			font-weight:bold;
-		}
-	</style>
-</head>
-<body>
+<?$this->load->view('header')?>
 
-<h1>Create Supply</h1>
+<?=(isset($errors) && $errors->user)?$errors->user:''?>
 
-<?/*<?if(isset($errors)):?>
-	<div><?=$errors->string?></div>
-<?endif?>*/?>
+<?/* This is to see ALL the errors
 
-<pre>
-	<?print_r($_POST)?>
-</pre>
+<?=$errors->string?>
 
-<?=form_open($this->uri->uri_string())?>
+*/?>
 
-<?=form_label('Start Date','start_date')?><br/>
-<?=form_input('start_date',$this->input->post('start_date'))?><br/>
-<?=(isset($errors) && $errors->start_date)?$errors->start_date:''?>
+<?=form_open($this->uri->uri_string(),array('class'=>'mainForm'))?>
+	<fieldset>
+		<div class="rowElem noborder">
+			<?=form_label('Transaction Date','trans_date')?>
+			<div class="formRight">
+				<?=form_input('trans_date',$this->input->post('trans_date'),' class="datepicker"')?>
+			</div>
+			<?=(isset($errors) && $errors->trans_date)?$errors->trans_date:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('End Date','end_date')?><br/>
-<?=form_input('end_date',$this->input->post('end_date'))?><br/>
-<?=(isset($errors) && $errors->end_date)?$errors->end_date:''?>
+		<div class="rowElem">
+			<?=form_label('Start date','start_date')?>
+			<div class="formRight">
+				<?=form_input('start_date',$this->input->post('start_date'),' class="datepicker"')?>
+			</div>
+			<?=(isset($errors) && $errors->start_date)?$errors->start_date:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('Payment Status','payment_status')?><br/>
-<?=form_input('payment_status',$this->input->post('payment_status'))?><br/>
-<?=(isset($errors) && $errors->payment_status)?$errors->payment_status:''?>
+		<div class="rowElem">
+			<?=form_label('End date','end_date')?>
+			<div class="formRight">
+				<?=form_input('end_date',$this->input->post('end_date'),' class="datepicker"')?>
+			</div>
+			<?=(isset($errors) && $errors->end_date)?$errors->end_date:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('Quantity','quantity')?><br/>
-<?=form_input('quantity',$this->input->post('quantity'))?><br/>
-<?=(isset($errors) && $errors->quantity)?$errors->quantity:''?>
+		<div class="rowElem">
+			<?=form_label('Tax amount','tax')?>
+			<div class="formRight">
+				<?=form_input('tax',$this->input->post('tax'))?>
+			</div>
+			<?=(isset($errors) && $errors->tax)?$errors->tax:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('Description','description')?><br/>
-<?=form_input('description',$this->input->post('description'))?><br/>
-<?=(isset($errors) && $errors->description)?$errors->description:''?>
+		<div class="rowElem">
+			<?=form_label('Customers','customer')?>
+			<div class="formRight">
+				<select data-placeholder="Choose a customer" id="customer" name="customer">
+					<option value="">Select a Customer</option>
+					<?foreach($customers->all as $c):?>
+						<option value="<?=$c->id?>"><?=$c->getFullName()?></option>
+					<?endforeach?>
+				</select>
+			</div>
+			<?=(isset($errors) && $errors->customer)?$errors->customer:''?>
+			<div class="fix"></div>
+		</div>
 
-<?=form_label('Price','price')?><br/>
-<?=form_input('price',$this->input->post('price'))?><br/>
-<?=(isset($errors) && $errors->price)?$errors->price:''?>
-
-<br/><br/><?=form_submit('submit','Create Customer')?>
-
+		<?=form_submit('submit','Create Transaction','class="greyishBtn submitForm"')?>
+ </fieldset>
 <?=form_close()?>
-</body>
-</html>
+
+<?$this->load->view('footer')?>

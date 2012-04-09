@@ -6,7 +6,7 @@
             <div class="userNav">
                 <ul>
                     <?/*<li><a href="<?=site_url('profile')?>" title=""><img src="<?=base_url()?>public/images/icons/topnav/profile.png" alt="" /><span>Profile</span></a></li>
-                    <?/*<li><a href="#" title=""><img src="<?=base_url()?>public/images/icons/topnav/tasks.png" alt="" /><span>Tasks</span></a></li>*/?>
+                    <?/* <li><a href="#" title=""><img src="<?=base_url()?>public/images/icons/topnav/tasks.png" alt="" /><span>Tasks</span></a></li>*/?>
                     <li class="dd"><img src="<?=base_url()?>public/images/icons/topnav/messages.png" alt="" /><span>Profile</span>
                         <ul class="menu_body">
                             <li><a href="<?=site_url('profile')?>" title="">Profile</a></li>
