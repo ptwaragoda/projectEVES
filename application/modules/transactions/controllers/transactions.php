@@ -215,8 +215,8 @@ class Transactions extends CI_Controller {
 		}
 		redirect('transactions/view/'.$transaction->id);
 	}
-
-	function edit($customerId = NULL)
+// There is no edit facility for transaction. If they need to change something, they have to delete it and start from scracth
+/*	function edit($customerId = NULL)
 	{
 		//TODO: This should edit a given customer
 		if($customerId == NULL) show_error("You cannot access this page directly");
@@ -247,7 +247,7 @@ class Transactions extends CI_Controller {
 		$data['heading']= 'Edit Customer';
 		$this->load->view('customers/edit',$data);
 	}
-
+*/
 	function finalize($transactionId = NULL)
 	{
 		if($transactionId == NULL) show_error('You cannot access this page directly');
@@ -278,27 +278,30 @@ class Transactions extends CI_Controller {
 		redirect('transactions/view/'.$t->id);
 	}
 
-	function delete($customerId = NULL)
-	{
-		//TODO: Delete a customer
-		// Figure out first whether you are truly deleting or just hiding them.
+//transaction delete should be if it is in draft, then delete. otherwise set the visibility to 0.
 
-		if($customerId == NULL) show_error("You cannot access this page directly");
+	function delete($transactionId = NULL)
+	{
+		//TODO: Delete a transaction
+		// Figure out first whether you are truly deleting or just hiding them.
+		$t = new Transaction();
+		if($transactionId == NULL) show_error("You cannot access this page directly");
 
 		// Case 1: Truly deleting
-		$c = new Customer();
-		$c->get_by_id($customerId);
-		if(!$c->exists()) show_error('The customer you are trying to delete does not exist');
+		
+		$t->get_by_id($transactionId);
+		if(!$t->exists()) show_error('The transaction you are trying to delete does not exist');
 
-		if($c->delete())
+		if($t->is_draft==1 && $t->delete())
 		{
-			$this->session->set_flashdata('success', 'The customer was successfully deleted');
-			redirect('customers');
+			$this->session->set_flashdata('success', 'The transaction was successfully deleted');
+			redirect('transactions');
 		}
 		else
 		{
-			$this->session->set_flashdata('errors', $c->error->string);
-			redirect('customers');
+			
+			$this->session->set_flashdata('errors', $t->error->string);
+			redirect('transactions');
 		}
 
 

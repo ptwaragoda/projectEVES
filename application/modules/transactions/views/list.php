@@ -55,9 +55,9 @@
 						<td><?=formatPrice($t->final_total)?></td>
 						<td><?=$t->is_draft?'Yes':'No'?></td>
 						<td>
-							<a href="<?=site_url('transactions/view/'.$t->id)?>">View</a> | 
-							<a href="<?=site_url('transactions/edit/'.$t->id)?>">Edit</a> | 
-							<a href="<?=site_url('transactions/delete/'.$t->id)?>">Delete</a>
+							<a href="<?=site_url('transactions/view/'.$t->id)?>">View / Add Machines</a>  
+							<?/*<a href="<?=site_url('transactions/edit/'.$t->id)?>">Edit</a> */?>
+							<? if($t->is_draft) :?>| <a href="<?=site_url('transactions/delete/'.$t->id)?>">Delete</a> <?endif?>
 						</td>
 					</tr>
 				<?endforeach?>
