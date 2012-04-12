@@ -19,5 +19,10 @@ class Supply extends DataMapper {
     {
         parent::__construct();
     }
+
+    function getPrice()
+    {
+    	return $this->price?'$'.number_format($this->price,2):'Free';
+    }
 	
 }

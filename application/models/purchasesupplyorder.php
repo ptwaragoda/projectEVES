@@ -8,14 +8,13 @@ class Purchasesupplyorder extends DataMapper {
 
 	var $validation = array(
 		'total' => array(
-	    	'label' => 'Total',
-	    	'rules' => array('required','trim')
+	    	'label' => 'Sub total',
+	    	'rules' => array('trim','numeric')
 		),
 		'final_total' => array(
-	    	'label' => 'Final Total',
-	    	'rules' => array('required','trim')
-		),
-		
+	    	'label' => 'Total',
+	    	'rules' => array('trim','numeric')
+		)
 	);
     function __construct($id = NULL)
     {

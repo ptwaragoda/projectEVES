@@ -12,7 +12,7 @@
 <?if($purchasesupplyorders->exists()):?>
 	<div class="widget first">
 		<div class="head">
-			<h5 class="iFrames">List of Purchase Supply Orders</h5>
+			<h5 class="iFrames">List of draft Purchase Supply Orders</h5>
 		</div>
 		<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
 			<thead>
@@ -21,8 +21,6 @@
 					<td>Agent</td>
 					<td>Created Date</td>
 					<td>Total</td>
-					<td>Is draft?</td>
-					<td>Processed?</td>
 					<td>Actions</td>
 				</tr>
 			</thead>
@@ -33,11 +31,8 @@
 						<td><?=$t->user_username?></td>
 						<td><?=date('Y-m-d',strtotime($t->created_on))?></td>
 						<td><?=formatPrice($t->final_total)?></td>
-						<td><?=$t->is_draft?'Yes':'No'?></td>
-						<td><?=$t->is_paid?'Yes':'No'?></td>
 						<td>
-							<a href="<?=site_url('purchasesupplyorders/view/'.$t->id)?>">View</a> | 
-							<a href="<?=site_url('purchasesupplyorders/edit/'.$t->id)?>">Edit</a> | 
+							<a href="<?=site_url('purchasesupplyorders/view/'.$t->id)?>">View / Add Items</a> | 
 							<a href="<?=site_url('purchasesupplyorders/delete/'.$t->id)?>">Delete</a>
 						</td>
 					</tr>

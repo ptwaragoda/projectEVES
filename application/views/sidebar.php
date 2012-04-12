@@ -22,6 +22,21 @@
                 <li><a href="<?=site_url('supplies/create')?>" title="">Create Supply</a></li>
             </ul>
         </li>
+        <li class="files"><a href="#" title="" class="exp"><span>Purchase Supply Orders</span></a>
+                <ul class="sub">
+                <?
+                        $u = new User();
+                        $u->get_by_id($this->tank_auth->get_user_id());
+                ?>
+
+                <?if($u->is_agent() && !$u->is_manager() && !$u->is_admin()):?>
+                        <li><a href="<?=site_url('purchasesupplyorders/drafts')?>" title="">Manage draft orders</a></li>
+                <?endif?>
+                <li><a href="<?=site_url('purchasesupplyorders')?>" title="">Manage pending orders</a></li>
+                <li><a href="<?=site_url('purchasesupplyorders/archive')?>" title="">Past orders</a></li>
+                <li><a href="<?=site_url('purchasesupplyorders/create')?>" title="">Create Order</a></li>
+            </ul>
+        </li>
         <li class="transaction"><a href="#" title="" class="exp"><span>Transactions</span></a>
                 <ul class="sub">
                 <li><a href="<?=site_url('transactions')?>" title="">Manage transactions</a></li>

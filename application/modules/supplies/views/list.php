@@ -26,7 +26,7 @@
 					<tr>
 						<td><a href="<?=site_url('supplies/view/'.$s->id)?>"><?=$s->id?></a></td>
 						<td><?=$s->name?></td>
-						<td><?=$s->price?></td>						
+						<td style="text-align:right"><?=$s->getPrice()?></td>						
 						<td>
 							<a href="<?=site_url('supplies/edit/'.$s->id)?>">Edit</a> | 
 							<a href="<?=site_url('supplies/delete/'.$s->id)?>">Delete</a>

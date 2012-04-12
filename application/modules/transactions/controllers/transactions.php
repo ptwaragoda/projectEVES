@@ -12,7 +12,11 @@ class Transactions extends CI_Controller {
 		//$this->output->enable_profiler(TRUE);
 
 		$t = new Transaction();
-		$t->where_related_user('id',$this->tank_auth->get_user_id())->order_by('created_on','desc');
+		$t->where_related_user('id',$this->tank_auth->get_user_id())->where('is_draft','0')->order_by('created_on','desc');
+
+		$dt = new Transaction();
+		$dt->where_related_user('id',$this->tank_auth->get_user_id())->where('is_draft','1')->order_by('created_on','desc');
+
 
 		$customerTitle = '';
 
@@ -24,14 +28,18 @@ class Transactions extends CI_Controller {
 			if($c->exists())
 			{
 				$t->where_related_customer('id',$customerId);
+				$dt->where_related_customer('id',$customerId);
+
 				$data['customer'] = $c;
 				$customerTitle = ' for '.$c->getFullName();
 			}
 		}
 
 		$t->get();
+		$dt->get();
 
 		$data['transactions'] = $t;
+		$data['drafttransactions'] = $dt;
 		$data['title'] = 'Transactions'.$customerTitle;
 
 		$this->load->view('transactions/list',$data);
@@ -77,10 +85,9 @@ class Transactions extends CI_Controller {
 			$machine->where_related_status('id','1');
 			$machine->where('id',$this->input->post('machine'));
 			$machine->get();
-			if($machine->exists()) $relatedObjects[] = $m;
+			if($machine->exists()) $relatedObjects[] = $machine;
 
 			$ml = new Machinelineitem();
-			/*$ml->quantity = $this->input->post('quantity');*/
 			$ml->price = $this->input->post('price');
 
 			if($ml->save($relatedObjects))
@@ -292,7 +299,9 @@ class Transactions extends CI_Controller {
 		$t->get_by_id($transactionId);
 		if(!$t->exists()) show_error('The transaction you are trying to delete does not exist');
 
-		if($t->is_draft==1 && $t->delete())
+		if($t->is_draft!=1) show_error('You cannot delete a transaction that is not in draft mode');
+
+		if($t->delete())
 		{
 			$this->session->set_flashdata('success', 'The transaction was successfully deleted');
 			redirect('transactions');

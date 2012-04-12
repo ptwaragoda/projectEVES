@@ -12,7 +12,7 @@
 <?if($purchasesupplyorders->exists()):?>
 	<div class="widget first">
 		<div class="head">
-			<h5 class="iFrames">List of Purchase Supply Orders</h5>
+			<h5 class="iFrames">List of pending Purchase Supply Orders</h5>
 		</div>
 		<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
 			<thead>
@@ -21,8 +21,6 @@
 					<td>Agent</td>
 					<td>Created Date</td>
 					<td>Total</td>
-					<td>Is draft?</td>
-					<td>Processed?</td>
 					<td>Actions</td>
 				</tr>
 			</thead>
@@ -33,12 +31,8 @@
 						<td><?=$t->user_username?></td>
 						<td><?=date('Y-m-d',strtotime($t->created_on))?></td>
 						<td><?=formatPrice($t->final_total)?></td>
-						<td><?=$t->is_draft?'Yes':'No'?></td>
-						<td><?=$t->is_paid?'Yes':'No'?></td>
 						<td>
-							<a href="<?=site_url('purchasesupplyorders/view/'.$t->id)?>">View</a> | 
-							<a href="<?=site_url('purchasesupplyorders/edit/'.$t->id)?>">Edit</a> | 
-							<a href="<?=site_url('purchasesupplyorders/delete/'.$t->id)?>">Delete</a>
+							<a href="<?=site_url('purchasesupplyorders/view/'.$t->id)?>">View</a>
 						</td>
 					</tr>
 				<?endforeach?>
@@ -53,7 +47,9 @@
     </div>
 <?endif?>
 
-<br/><br/>
-<a onclick="return confirm('Are you sure you want to create a new purchase supply order?')" href="<?=site_url('purchasesupplyorders/create')?>" title="Create new Supply Order" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Create new Supply Order</span></a>
+<?if($user->is_agent()):?>
+	<br/><br/>
+	<a onclick="return confirm('Are you sure you want to create a new purchase supply order?')" href="<?=site_url('purchasesupplyorders/create')?>" title="Create new Supply Order" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Create new Supply Order</span></a>
+<?endif?>
 
 <?$this->load->view('footer')?>

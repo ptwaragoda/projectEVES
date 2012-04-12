@@ -9,12 +9,12 @@
 
 	    <div class="body aligncenter">
 
-	        <?=dashboardLink('Customers',site_url('customers'),'adminUser.png')?>
-	        <?=dashboardLink('Machines',site_url('machines'),'pencil.png')?>
+	        <?=dashboardLink('Customers',site_url('customers'),'users.png')?>
+	        <?=dashboardLink('Machines',site_url('machines'),'robot.png')?>
 	        <?=dashboardLink('Models',site_url('machinemodels'),'pencil.png')?>
-	        <?=dashboardLink('Brands',site_url('machinebrands'),'pencil.png')?>
-	        <?=dashboardLink('Supplies',site_url('supplies'),'pencil.png')?>
-	        <?=dashboardLink('Transactions',site_url('transactions'),'pencil.png')?>
+	        <?=dashboardLink('Brands',site_url('machinebrands'),'companies.png')?>
+	        <?=dashboardLink('Supplies',site_url('supplies'),'docs.png')?>
+	        <?=dashboardLink('Transactions',site_url('transactions'),'cashRegister.png')?>
 
 	    </div>
 
@@ -28,7 +28,7 @@
 		    <div class="body aligncenter">
 
 		        <?if($this->tank_auth->is_admin() || $this->tank_auth->is_manager()):?>
-		        	<?=dashboardLink('Users',site_url('users'),'pencil.png')?>
+		        	<?=dashboardLink('Users',site_url('users'),'adminUser.png')?>
 		        <?endif?>
 		        <?/*<?if($this->tank_auth->is_admin()):?>
 		        	<?=dashboardLink('Permissions',site_url('permissions'),'pencil.png','')?>
