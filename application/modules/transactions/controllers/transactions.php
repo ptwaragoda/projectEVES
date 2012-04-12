@@ -188,6 +188,7 @@ class Transactions extends CI_Controller {
 		}
 		
 		$c = new Customer();
+		$c->where('visible','1');
 		$c->order_by('first_name','asc')->get();
 		$data['customers'] = $c;
 

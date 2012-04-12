@@ -4,6 +4,7 @@ class Machinebrands extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 	}
 
 	function showsuccess()
@@ -68,7 +69,6 @@ class Machinebrands extends CI_Controller {
 
 	function edit($machinebrandId = NULL)
 	{
-		//TODO: This should edit a given machinebrand
 		if($machinebrandId == NULL) show_error("You cannot access this page directly");
 
 		$mb = new Machinebrand();

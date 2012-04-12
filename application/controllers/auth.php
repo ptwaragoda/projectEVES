@@ -69,6 +69,11 @@ class Auth extends CI_Controller
 						$this->form_validation->set_value('remember'),
 						$data['login_by_username'],
 						$data['login_by_email'])) {								// success
+					
+
+					$u = new User();
+					$u->get_by_id($this->tank_auth->get_user_id());
+					if(!$u->is_admin() && !$u->is_manager() && !$u->is_agent()) redirect('auth/logout');
 					redirect('');
 
 				} else {

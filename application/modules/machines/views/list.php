@@ -22,7 +22,10 @@
 					<td>Serial Number</td>
 					<td>Status</td>
 					<td>Machine Model</td>
-					<td>Actions</td>
+					<td>Agent</td>
+					<?if($user->is_manager() || $user->is_admin()):?>
+						<td>Actions</td>
+					<?endif?>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,10 +38,13 @@
 						<td><?=$m->serial_num?></td>
 						<td><?=$m->status_name?></td>
 						<td><?=$m->machinemodel_name?></td>
+						<td><?=$m->user_username?$m->user_username:'Unassigned'?></td>
+						<?if($user->is_manager() || $user->is_admin()):?>
 						<td>
 							<a href="<?=site_url('machines/edit/'.$m->id)?>">Edit</a> | 
-							<a href="<?=site_url('machines/delete/'.$m->id)?>">Delete</a>
+							<a href="<?=site_url('machines/assign/'.$m->id)?>">Assign</a>
 						</td>
+						<?endif?>
 					</tr>
 				<?endforeach?>
 			</tbody>
@@ -52,7 +58,9 @@
     </div>
 <?endif?>
 
+<?if($user->is_manager() || $user->is_admin()):?>
 <br/><br/>
 <a href="<?=site_url('machines/create')?>" title="Create New Machine" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Create New Machine</span></a>
+<?endif?>
 
 <?$this->load->view('footer')?>

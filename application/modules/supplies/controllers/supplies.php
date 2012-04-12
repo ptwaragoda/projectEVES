@@ -4,18 +4,16 @@ class Supplies extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-	}
+		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 
-	function showsuccess()
-	{
-		$this->session->set_flashdata('success',date('Y-m-d H:i:s'));
-		redirect('supplies');
+		$u = new User();
+		$u->get_by_id($this->tank_auth->get_user_id());
+
+		if(!$u->is_admin() && !$u->is_manager()) show_error('You do not have permission to access this page');
 	}
 
 	function index()
 	{
-		//TODO: This is the default function. This should ideally list supplies
-
 		$s = new Supply();
 		$s->order_by('id','asc')->get();
 

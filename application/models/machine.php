@@ -2,7 +2,7 @@
 
 class Machine extends DataMapper {
 
-	var $has_one = array('machinemodel','status');
+	var $has_one = array('machinemodel','status','user');
 	var $has_many = array('machinelineitem');
 
 	var $validation = array(

@@ -85,6 +85,12 @@
 <div style="width:320px;margin:0 auto;margin-top:70px">
 	<?=form_error('login'); ?><?=isset($errors['login'])?$errors['login']:''; ?>
 	<?=form_error('password'); ?><?=isset($errors['password'])?$errors['password']:''; ?>
+
+        <div>
+            <div class="nNote nWarning hideit">
+                <p><strong>Warning: </strong>Note that if your account is not yet approved, you will not be able to log in</p>
+            </div>  
+        </div>
 </div>
 
 <!-- Login form area -->

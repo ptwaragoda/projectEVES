@@ -37,7 +37,7 @@
 						<?endif?>
 						<td>
 							<a href="<?=site_url('customers/edit/'.$c->id)?>">Edit</a> | 
-							<a href="<?=site_url('customers/delete/'.$c->id)?>">Delete</a>
+							<a onclick="return confirm('Are you sure you want to delete?')" href="<?=site_url('customers/delete/'.$c->id)?>">Delete</a>
 						</td>
 					</tr>
 				<?endforeach?>

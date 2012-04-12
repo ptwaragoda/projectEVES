@@ -5,7 +5,12 @@ class Backups extends CI_Controller {
 	{
 		parent::__construct();
 		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
-		//TODO: Make sure only admins can access this whole controller
+
+		$u = new User();
+		$u->get_by_id($this->tank_auth->get_user_id());
+
+		if(!$u->is_admin()) show_error('You do not have permission to access this page');
+
 		$this->load->helper('directory');
 	}
 

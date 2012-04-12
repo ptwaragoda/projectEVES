@@ -3,7 +3,7 @@
 class User extends DataMapper {
 
 	var $has_one = array('group');
-	var $has_many = array('customer','transaction','purchasesupplyorder');
+	var $has_many = array('customer','transaction','purchasesupplyorder','machine');
 
     function __construct($id = NULL)
     {

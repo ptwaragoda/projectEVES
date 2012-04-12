@@ -17,10 +17,9 @@
 			<?=form_label('Brand Name','machinebrand')?>
 			<div class="formRight">
 				<select data-placeholder="Choose a Brand" id="machinebrand" name="machinebrand">
-					<option value="<?$machinemodel->machinebrand_id?>"><?=$machinemodel->machinebrand_name?></option>
-					<option value="" disabled>------------</option>
+					<option value="">Select Machine Brand</option>
 					<?foreach($machinebrand->all as $mb):?>
-						<option value="<?=$mb->id?>" <?=$mb->id == $this->input->post('machinebrand')?' selected="selected"':''?>><?=$mb->name?></option>
+						<option value="<?=$mb->id?>" <?=$mb->id == $machinemodel->machinebrand_id?' selected="selected"':''?>><?=$mb->name?></option>
 					<?endforeach?>
 				</select>
 			</div>

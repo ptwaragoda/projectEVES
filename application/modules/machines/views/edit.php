@@ -15,7 +15,7 @@
 		<div class="rowElem noborder">
 			<?=form_label('Machine name','name')?>
 			<div class="formRight">
-				<?=form_input('name',$machines->name)?>
+				<?=form_input('name',$machine->name)?>
 			</div>
 			<?=(isset($errors) && $errors->name)?$errors->name:''?>
 			<div class="fix"></div>
@@ -24,7 +24,7 @@
 		<div class="rowElem">
 			<?=form_label('Machine Square feet','cover_square_feet')?>
 			<div class="formRight">
-				<?=form_input('cover_square_feet',$machines->cover_square_feet)?>
+				<?=form_input('cover_square_feet',$machine->cover_square_feet)?>
 			</div>
 			<?=(isset($errors) && $errors->cover_square_feet)?$errors->cover_square_feet:''?>
 			<div class="fix"></div>
@@ -33,7 +33,7 @@
 		<div class="rowElem">
 			<?=form_label('Machine Purchase Date','purchase_date')?>
 			<div class="formRight">
-				<?=form_input('purchase_date',$machines->purchase_date)?>
+				<?=form_input('purchase_date',$machine->purchase_date,' class="datepicker"')?>
 			</div>
 			<?=(isset($errors) && $errors->purchase_date)?$errors->purchase_date:''?>
 			<div class="fix"></div>
@@ -42,27 +42,37 @@
 		<div class="rowElem">
 			<?=form_label('Machine Serial Number','serial_num')?>
 			<div class="formRight">
-				<?=form_input('serial_num',$machines->serial_num)?>
+				<?=form_input('serial_num',$machine->serial_num)?>
 			</div>
 			<?=(isset($errors) && $errors->serial_num)?$errors->serial_num:''?>
 			<div class="fix"></div>
 		</div>
 
 		<div class="rowElem">
-			<?=form_label('Machine Status','status_id')?>
+			<?=form_label('Status','status')?>
 			<div class="formRight">
-				<?=form_input('status_id',$machines->status_id)?>
+				<select data-placeholder="Choose a Status" id="status" name="status">
+					<option value="">Select Status</option>
+					<?foreach($statuses->all as $s):?>
+						<option value="<?=$s->id?>" <?=$s->id == $machine->machinemodel_id?' selected="selected"':''?>><?=$s->name?></option>
+					<?endforeach?>
+				</select>
 			</div>
-			<?=(isset($errors) && $errors->status_id)?$errors->status_id:''?>
+			<?=(isset($errors) && $errors->status)?$errors->status:''?>
 			<div class="fix"></div>
 		</div>
 
 		<div class="rowElem">
-			<?=form_label('Machine Model','machinemodel_id')?>
+			<?=form_label('Machine Model','model')?>
 			<div class="formRight">
-				<?=form_input('machinemodel_id',$machines->machinemodel_id)?>
+				<select data-placeholder="Choose a Machine Model" id="model" name="model">
+					<option value="">Select Machine Brand</option>
+					<?foreach($models->all as $mm):?>
+						<option value="<?=$mm->id?>" <?=$mm->id == $machine->machinemodel_id?' selected="selected"':''?>><?=$mm->name?></option>
+					<?endforeach?>
+				</select>
 			</div>
-			<?=(isset($errors) && $errors->machinemodel_id)?$errors->machinemodel_id:''?>
+			<?=(isset($errors) && $errors->machinemodel)?$errors->machinemodel:''?>
 			<div class="fix"></div>
 		</div>
 

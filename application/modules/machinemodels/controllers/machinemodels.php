@@ -4,18 +4,11 @@ class Machinemodels extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-	}
-
-	function showsuccess()
-	{
-		$this->session->set_flashdata('success',date('Y-m-d H:i:s'));
-		redirect('machinemodels');
+		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
 	}
 
 	function index()
 	{
-		//TODO: This is the default function. This should ideally list customers
-
 		$mm = new Machinemodel();
 		$mm->include_related('machinebrand',array('name'));
 		$mm->order_by('id','asc')->get();
@@ -53,7 +46,6 @@ class Machinemodels extends CI_Controller {
 	
 	function create()
 	{
-		//TODO: We show the form and also create a customer here.
 		$mm = new Machinemodel();
 		$relatedObjects = array();
 
@@ -91,18 +83,17 @@ class Machinemodels extends CI_Controller {
 
 	function edit($machinemodel_Id = NULL)
 	{
-		//TODO: This should edit a given customer
 		if($machinemodel_Id == NULL) show_error("You cannot access this page directly");
 
 		$mm = new Machinemodel();
-		$mm->include_related('machinebrand',array('name','id'));
 		$mm->get_by_id($machinemodel_Id);
 
-		$relatedObjects = array();
+		if(!$mm->exists()) show_error('The Machine Model you are trying to edit does not exist');
+
 		$mb = new Machinebrand();
 		$mb->order_by('name','asc')->get();
 
-		if(!$mm->exists()) show_error('The Machine Model you are trying to edit does not exist');
+		$relatedObjects = array();
 
 		if($this->input->server('REQUEST_METHOD') == 'POST')
 		{
@@ -112,7 +103,6 @@ class Machinemodels extends CI_Controller {
 			$mb->get_by_id($this->input->post('machinebrand', TRUE));
 			if($mb->exists()) $relatedObjects[] = $mb;
 			
-
 			if($mm->save($relatedObjects))
 			{
 				$this->session->set_flashdata('success', 'The Machine Model was successfully updated');

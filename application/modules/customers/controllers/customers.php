@@ -18,6 +18,7 @@ class Customers extends CI_Controller {
 			$c->where_related_user('id', $u->id);
 
 		$c->include_related('user','username');
+		$c->where('visible','1');
 		$c->order_by('created_on','desc')->get();
 
 		//customers is the index name which could be any name and this name 
@@ -40,6 +41,7 @@ class Customers extends CI_Controller {
 		if($customerId == NULL) show_error("You cannot access this page directly");
 
 		$c = new Customer();
+		$c->where('visible','1');
 		$c->get_by_id($customerId);
 		//$c->where('id',$customerId)->get(); This is the same as above
 
@@ -97,6 +99,7 @@ class Customers extends CI_Controller {
 		if($customerId == NULL) show_error("You cannot access this page directly");
 
 		$c = new Customer();
+		$c->where('visible','1');
 		$c->get_by_id($customerId);
 		if(!$c->exists()) show_error('The customer you are trying to edit does not exist');
 
@@ -135,6 +138,29 @@ class Customers extends CI_Controller {
 	}
 
 	function delete($customerId = NULL)
+	{
+
+		if($customerId == NULL) show_error("You cannot access this page directly");
+
+		$c = new Customer();
+		$c->get_by_id($customerId);
+		if(!$c->exists()) show_error('The customer you are trying to delete does not exist');
+
+		$c->visible = 0;
+		if($c->save())
+		{
+			$this->session->set_flashdata('success', 'The customer was successfully deleted');
+			redirect('customers');
+		}
+		else
+		{
+			$this->session->set_flashdata('errors', $c->error->string);
+			redirect('customers');
+		}
+	}
+
+
+	function _deleteExsample($customerId = NULL)
 	{
 		//TODO: Delete a customer
 		// Figure out first whether you are truly deleting or just hiding them.
