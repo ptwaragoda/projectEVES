@@ -31,7 +31,7 @@
             </ul>
         </li>
         <?endif?>
-        <li class="files"><a href="#" title="" class="exp"><span>Purchase Supply Orders</span></a>
+        <li class="supplyorder"><a href="#" title="" class="exp"><span>Purchase Supply Orders</span></a>
                 <ul class="sub">
                 
 
@@ -50,12 +50,12 @@
             </ul>
         </li>
         <?if($u->is_admin()):?>
-                <li class="transaction"><a href="#" title="" class="exp"><span>Users</span></a>
+                <li class="user"><a href="#" title="" class="exp"><span>Users</span></a>
                         <ul class="sub">
                         <li><a href="<?=site_url('usermanager')?>" title="">Manage users</a></li>
                     </ul>
                 </li>
-                <li class="transaction"><a href="#" title="" class="exp"><span>Backups</span></a>
+                <li class="backup"><a href="#" title="" class="exp"><span>Backups</span></a>
                         <ul class="sub">
                         <li><a href="<?=site_url('admin/backups')?>" title="">Manage backups</a></li>
                         <li><a href="<?=site_url('admin/backups/create')?>" title="">Create backup</a></li>
