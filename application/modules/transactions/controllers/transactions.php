@@ -5,19 +5,30 @@ class Transactions extends CI_Controller {
 	{
 		parent::__construct();
 		if(!$this->tank_auth->is_logged_in()) redirect('auth/login');
+		
 	}
 
 	function index()
 	{
 		//$this->output->enable_profiler(TRUE);
+		$u = new User();
+		$u->get_by_id($this->tank_auth->get_user_id());
+		
+		
+		if($u->is_agent())
+		{
+			$t = new Transaction();
+			$t->where_related_user('id',$this->tank_auth->get_user_id())->where('is_draft','0')->order_by('created_on','desc');
+		}
+		else
+		{
+			$t = new Transaction();
+			$t->where('is_draft','0')->order_by('created_on','desc');
+		}
 
-		$t = new Transaction();
-		$t->where_related_user('id',$this->tank_auth->get_user_id())->where('is_draft','0')->order_by('created_on','desc');
-
-		$dt = new Transaction();
-		$dt->where_related_user('id',$this->tank_auth->get_user_id())->where('is_draft','1')->order_by('created_on','desc');
-
-
+			$dt = new Transaction();
+			$dt->where_related_user('id',$this->tank_auth->get_user_id())->where('is_draft','1')->order_by('created_on','desc');
+		
 		$customerTitle = '';
 
 		$customerId = $this->input->get('customer');
@@ -64,8 +75,12 @@ class Transactions extends CI_Controller {
 			$currentMachinesArray[] = $m->id;
 		}
 
+		$u = new User();
+			$u->get_by_id($this->tank_auth->get_user_id());
+
 		$m = new Machine();
-		
+		if($u->is_agent())
+			$m->where_related_user('id', $u->id);
 		if(count($currentMachinesArray))
 		{
 			$m->group_start(); 
@@ -169,6 +184,7 @@ class Transactions extends CI_Controller {
 			$relatedObjects = array();
 
 			$c = new Customer();
+
 			$c->get_by_id($this->input->post('customer', TRUE));
 			if($c->exists()) $relatedOjbects[] = $c;
 
@@ -187,8 +203,15 @@ class Transactions extends CI_Controller {
 			}
 		}
 		
+		$u = new User();
+		$u->get_by_id($this->tank_auth->get_user_id());
+		
 		$c = new Customer();
 		$c->where('visible','1');
+
+		if($u->is_agent())
+			$c->where_related_user('id', $u->id); // filters the customers
+
 		$c->order_by('first_name','asc')->get();
 		$data['customers'] = $c;
 
