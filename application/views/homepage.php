@@ -34,8 +34,8 @@
 		    <div class="body aligncenter">
 
 		        <?if($this->tank_auth->is_admin() || $this->tank_auth->is_manager()):?>
-		        	<?=dashboardLink('Users',site_url('users'),'adminUser.png')?>
-		        	<?=dashboardLink('Backups',site_url('backups'),'refresh.png')?>
+		        	<?=dashboardLink('Users',site_url('usermanager'),'adminUser.png')?>
+		        	<?=dashboardLink('Backups',site_url('admin/backups'),'refresh.png')?>
 		        <?endif?>
 		        <?/*<?if($this->tank_auth->is_admin()):?>
 		        	<?=dashboardLink('Permissions',site_url('permissions'),'pencil.png','')?>
