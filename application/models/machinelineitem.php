@@ -4,7 +4,7 @@ class Machinelineitem extends DataMapper {
 
 	var $has_one = array('transaction','machine');
 
-	var $table = 'Machinelineitems';
+	var $table = 'machinelineitems';
 
 	var $validation = array(
 		/*'name' => array(
