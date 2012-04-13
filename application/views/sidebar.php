@@ -40,7 +40,9 @@
                 <?endif?>
                 <li><a href="<?=site_url('purchasesupplyorders')?>" title="">Manage pending orders</a></li>
                 <li><a href="<?=site_url('purchasesupplyorders/archive')?>" title="">Past orders</a></li>
-                <li><a href="<?=site_url('purchasesupplyorders/create')?>" title="">Create Order</a></li>
+                <?if($u->is_agent() && !$u->is_manager() && !$u->is_admin()):?>
+                        <li><a href="<?=site_url('purchasesupplyorders/create')?>" title="">Create Order</a></li>
+                <?endif?>
             </ul>
         </li>
         <li class="transaction"><a href="#" title="" class="exp"><span>Transactions</span></a>
