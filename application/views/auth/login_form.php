@@ -72,10 +72,10 @@
         <div class="wrapper">
             <div class="backTo"><a href="<?=base_url()?>" title=""><img src="<?=base_url()?>public/images/icons/topnav/mainWebsite.png" alt="" /><span>EVES</span></a></div>
             <div class="userNav">
-                <ul>
+                <?/*<ul>
                     <li><a href="<?=site_url('contact')?>" title=""><img src="<?=base_url()?>public/images/icons/topnav/contactAdmin.png" alt="" /><span>Contact</span></a></li>
                     <li><a href="<?=site_url('help')?>" title=""><img src="<?=base_url()?>public/images/icons/topnav/help.png" alt="" /><span>Help</span></a></li>
-                </ul>
+                </ul> */?>
             </div>
             <div class="fix"></div>
         </div>

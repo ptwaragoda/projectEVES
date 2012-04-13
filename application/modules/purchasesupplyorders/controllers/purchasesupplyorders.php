@@ -185,7 +185,32 @@ class Purchasesupplyorders extends CI_Controller {
 
 		$p->save();
 
+		$data['order'] = $p;
+		$this->_send_email($data);
+
 		redirect('purchasesupplyorders/view/'.$p->id);
+	}
+
+	/*function fakefinalise($id)
+	{
+		$p = new Purchasesupplyorder();
+		$p->get_by_id($id);
+
+		$data['order'] = $p;
+		$this->_send_email($data);
+	}*/
+
+	function _send_email(&$data)
+	{
+		//echo $this->load->view('email/notification-html', $data, TRUE);exit;
+		$this->load->library('email');
+		$this->email->from('ptwaragoda@learn.senecac.on.ca');
+		$this->email->reply_to('thilanka555@gmail.com');
+		$this->email->to('thilanka555@gmail.com');
+		$this->email->subject('Purchase Supply Order Created');
+		$this->email->message($this->load->view('email/notification-html', $data, TRUE));
+		$this->email->set_alt_message($this->load->view('email/notifications-txt', $data, TRUE));
+		$this->email->send();
 	}
 
 	function processPayment($id = NULL)
