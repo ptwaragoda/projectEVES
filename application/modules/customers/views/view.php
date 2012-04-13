@@ -36,6 +36,6 @@
                        
 </div>
 
-<p><a href="<?=site_url('customers')?>">Back to Customers List</a></p>
+<p><a href="<?=site_url('customers')?>" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to Customers List<span></a></p>
 
 <?$this->load->view('footer')?>

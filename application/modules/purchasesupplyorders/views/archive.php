@@ -39,6 +39,6 @@
 <?endif?>
 
 <br/><br/>
-<a href="<?=site_url('purchasesupplyorders')?>" title="Create new Supply Order" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/add.png" alt="" class="icon" /><span>Back to pending supply orders</span></a>
+<a href="<?=site_url('purchasesupplyorders')?>" title="Create new Supply Order" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to pending supply orders</span></a>
 
 <?$this->load->view('footer')?>

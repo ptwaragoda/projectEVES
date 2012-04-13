@@ -181,6 +181,6 @@
     <?=form_close()?>
 <?endif?>
 
-<p><a href="<?=site_url('transactions')?>">Back to Transactions List</a></p>
+<p><a href="<?=site_url('transactions')?>" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to Transactions List</span></a></p>
 
 <?$this->load->view('footer')?>

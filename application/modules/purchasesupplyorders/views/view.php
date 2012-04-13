@@ -166,15 +166,15 @@
 
 <?if($user->is_agent()):?>
     <?if($order->is_draft):?>
-        <p><a href="<?=site_url('purchasesupplyorders/drafts')?>">Back to draft Purchase Supply Orders List</a></p>
+        <p><a href="<?=site_url('purchasesupplyorders/drafts')?>" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to draft Purchase Supply Orders List</span></a></p>
     <?endif?>
 <?endif?>
 
 
 <?if($order->is_paid):?>
-    <p><a href="<?=site_url('purchasesupplyorders/archive')?>">Back to old Purchase Supply Orders List</a></p>
+    <p><a href="<?=site_url('purchasesupplyorders/archive')?>" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to old Purchase Supply Orders List</span></a></p>
 <?else:?>
-    <p><a href="<?=site_url('purchasesupplyorders')?>">Back to Purchase Supply Orders List</a></p>
+    <p><a href="<?=site_url('purchasesupplyorders')?>" class="btnIconLeft"><img src="<?=base_url()?>public/images/icons/dark/arrowLeft.png" alt="" class="icon" /><span>Back to Purchase Supply Orders List</span></a></p>
 <?endif?>
 
 

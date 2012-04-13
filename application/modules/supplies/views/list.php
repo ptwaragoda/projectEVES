@@ -24,7 +24,7 @@
 			<tbody>
 				<?foreach($supplies->all as $s):?>
 					<tr>
-						<td><a href="<?=site_url('supplies/view/'.$s->id)?>"><?=$s->id?></a></td>
+						<td><?=$s->id?></td>
 						<td><?=$s->name?></td>
 						<td style="text-align:right"><?=$s->getPrice()?></td>						
 						<td>
