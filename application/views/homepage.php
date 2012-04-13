@@ -26,14 +26,14 @@
 
 	</div>
 
-	<?if($this->tank_auth->is_admin() || $this->tank_auth->is_manager()):?>
+	<?if($this->tank_auth->is_admin()):?>
 		<div class="widget">
 
 		    <div class="head"><h5 class="iImage2">Administrative Links</h5></div>
 
 		    <div class="body aligncenter">
 
-		        <?if($this->tank_auth->is_admin() || $this->tank_auth->is_manager()):?>
+		        <?if($this->tank_auth->is_admin()):?>
 		        	<?=dashboardLink('Users',site_url('usermanager'),'adminUser.png')?>
 		        	<?=dashboardLink('Backups',site_url('admin/backups'),'refresh.png')?>
 		        <?endif?>

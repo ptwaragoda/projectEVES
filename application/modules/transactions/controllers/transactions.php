@@ -60,11 +60,14 @@ class Transactions extends CI_Controller {
 	{
 		if($transactionId == NULL) show_error("You cannot access this page directly");
 
+		$u = new User();
+			$u->get_by_id($this->tank_auth->get_user_id());
+
 		$t = new Transaction();
 		$t->get_by_id($transactionId);
 		if(!$t->exists()) show_error('The transaction you are trying to view does not exist');
 
-		if($t->user_id != $this->tank_auth->get_user_id()) show_error('You do not have access to view this transaction');
+		if($t->user_id != $this->tank_auth->get_user_id() && $u->is_agent()) show_error('You do not have access to view this transaction');
 
 		$currentMachines = new Machine();
 		$currentMachines->where_related('machinelineitem/transaction', 'id', $t->id)->get();

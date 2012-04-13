@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <td>Transaction Date:</td>
-                <td align="right"><?=date('F d, Y', strtotime($transaction->transaction_date))?></td>
+                <td align="right"><?=date('F d, Y', strtotime($transaction->trans_date))?></td>
             </tr>
             <tr>
                 <td>Start Date:</td>
