@@ -209,7 +209,7 @@ class Purchasesupplyorders extends CI_Controller {
 		$this->email->to('thilanka555@gmail.com');
 		$this->email->subject('Purchase Supply Order Created');
 		$this->email->message($this->load->view('email/notification-html', $data, TRUE));
-		$this->email->set_alt_message($this->load->view('email/notifications-txt', $data, TRUE));
+		$this->email->set_alt_message($this->load->view('email/notification-txt', $data, TRUE));
 		$this->email->send();
 	}
 
