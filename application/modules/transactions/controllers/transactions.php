@@ -152,7 +152,7 @@ class Transactions extends CI_Controller {
 
 		foreach($machinelineitems->all as $ml)
 		{
-			$total += $ml->price;
+			$total += $ml->price * 1.13;
 		}
 
 		$t->final_total = $total;

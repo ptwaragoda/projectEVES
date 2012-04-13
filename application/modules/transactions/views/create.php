@@ -37,14 +37,14 @@
 			<div class="fix"></div>
 		</div>
 
-		<div class="rowElem">
+		<? /*<div class="rowElem">
 			<?=form_label('Tax amount','tax')?>
 			<div class="formRight">
 				<?=form_input('tax',$this->input->post('tax'))?>
 			</div>
 			<?=(isset($errors) && $errors->tax)?$errors->tax:''?>
 			<div class="fix"></div>
-		</div>
+		</div> */ ?>
 
 		<div class="rowElem">
 			<?=form_label('Customers','customer')?>
