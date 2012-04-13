@@ -158,7 +158,7 @@ class Purchasesupplyorders extends CI_Controller {
 
 		foreach($supplyitems->all as $sl)
 		{
-			$total += $sl->price;
+			$total += $sl->price * 1.13;
 		}
 
 		$p->final_total = $total;
